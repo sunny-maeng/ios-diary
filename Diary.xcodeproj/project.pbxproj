@@ -18,6 +18,9 @@
 		41C61BCE29B34D85009E7040 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BCD29B34D85009E7040 /* WeatherInfo.swift */; };
 		41C61BD529B34E53009E7040 /* FetchDiariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */; };
 		41C61BD829B34F09009E7040 /* DiariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BD729B34F09009E7040 /* DiariesRepository.swift */; };
+		41C61BDB29B35168009E7040 /* FetchDiariesUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BDA29B35168009E7040 /* FetchDiariesUseCaseProtocol.swift */; };
+		41C61BDD29B35189009E7040 /* SaveDiaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BDC29B35189009E7040 /* SaveDiaryUseCase.swift */; };
+		41C61BDF29B35196009E7040 /* SaveDiaryUseCaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BDE29B35196009E7040 /* SaveDiaryUseCaseProtocol.swift */; };
 		41C6A0FC295BDAD600304FC2 /* CustomActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6A0FB295BDAD600304FC2 /* CustomActivityViewController.swift */; };
 		41E420812967D44000283FE5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E420802967D44000283FE5 /* LocationManager.swift */; };
 		90203F9F2967C17F002901C1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90203F9E2967C17F002901C1 /* CacheManager.swift */; };
@@ -51,6 +54,9 @@
 		41C61BCD29B34D85009E7040 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDiariesUseCase.swift; sourceTree = "<group>"; };
 		41C61BD729B34F09009E7040 /* DiariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiariesRepository.swift; sourceTree = "<group>"; };
+		41C61BDA29B35168009E7040 /* FetchDiariesUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FetchDiariesUseCaseProtocol.swift; path = "../../../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/ios-diary 오후 7.11.41/Diary/Domain/Interfaces/FetchDiariesUseCaseProtocol.swift"; sourceTree = "<group>"; };
+		41C61BDC29B35189009E7040 /* SaveDiaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiaryUseCase.swift; sourceTree = "<group>"; };
+		41C61BDE29B35196009E7040 /* SaveDiaryUseCaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiaryUseCaseProtocol.swift; sourceTree = "<group>"; };
 		41C6A0FB295BDAD600304FC2 /* CustomActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityViewController.swift; sourceTree = "<group>"; };
 		41E420802967D44000283FE5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		449857F28E91002F94820D83 /* Pods-Diary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diary.debug.xcconfig"; path = "Target Support Files/Pods-Diary/Pods-Diary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -142,6 +148,8 @@
 			isa = PBXGroup;
 			children = (
 				41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */,
+				41C61BDC29B35189009E7040 /* SaveDiaryUseCase.swift */,
+				41C61BD929B35153009E7040 /* Protocols */,
 			);
 			path = UseCase;
 			sourceTree = "<group>";
@@ -152,6 +160,15 @@
 				41C61BD729B34F09009E7040 /* DiariesRepository.swift */,
 			);
 			path = Interfaces;
+			sourceTree = "<group>";
+		};
+		41C61BD929B35153009E7040 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				41C61BDA29B35168009E7040 /* FetchDiariesUseCaseProtocol.swift */,
+				41C61BDE29B35196009E7040 /* SaveDiaryUseCaseProtocol.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		41E420822967D47600283FE5 /* Weather */ = {
@@ -369,16 +386,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				41C61BDB29B35168009E7040 /* FetchDiariesUseCaseProtocol.swift in Sources */,
 				C739AE29284DF28600741E8F /* DiaryListViewController.swift in Sources */,
 				4143E31529640BE400744B00 /* WeatherURL.swift in Sources */,
 				41C61BCE29B34D85009E7040 /* WeatherInfo.swift in Sources */,
 				905456F22952CCF200AAFEB0 /* DiaryDetailViewController.swift in Sources */,
+				41C61BDD29B35189009E7040 /* SaveDiaryUseCase.swift in Sources */,
 				C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */,
 				C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */,
 				41BE025329533C9E006053FD /* RegisterDiaryViewController.swift in Sources */,
 				4143E3112963FA3900744B00 /* URLSessionProvider.swift in Sources */,
 				90DC5C8C2951A6E1003D6684 /* CustomUI.swift in Sources */,
 				90DC5C8A2951A059003D6684 /* DiaryCell.swift in Sources */,
+				41C61BDF29B35196009E7040 /* SaveDiaryUseCaseProtocol.swift in Sources */,
 				90DC5C8829519711003D6684 /* DiaryListView.swift in Sources */,
 				905456EF2952CC1900AAFEB0 /* DiaryDetailView.swift in Sources */,
 				C739AE2F284DF28600741E8F /* Diary.xcdatamodeld in Sources */,
