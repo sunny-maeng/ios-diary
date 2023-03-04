@@ -15,4 +15,5 @@ struct DiaryInfo: Hashable {
     let weather: WeatherInfo?
     var id = UUID()
     var createdDate: String { createdAt.localizedDateFormat }
+    
 }

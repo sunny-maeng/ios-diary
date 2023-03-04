@@ -7,18 +7,12 @@
 
 import Foundation
 
-struct WeatherInfo: Hashable {
-    
-    let main: String
-    let icon: String
-    
+extension WeatherInfo: Decodable {
+
     enum CodingKeys: String, CodingKey {
-       
+
         case main, icon, weather
     }
-}
-
-extension WeatherInfo: Decodable {
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
