@@ -29,7 +29,7 @@ final class DiaryListViewController: UIViewController {
     }
     
     private func convertDiaryData() {
-        diary = CoreDataManager.shared.fetchDiaries()
+        diary = CoreDataDiaryInfoCRUDStorage().fetchDiaries()
     }
     
     private func configureDiaryListDataSource() {
@@ -134,7 +134,7 @@ extension DiaryListViewController: DiaryListViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: Constant.deleteActionTitle) {
             _, _, handler in
-            CoreDataManager.shared.delete(self.diary[indexPath.item])
+            CoreDataDiaryInfoCRUDStorage().delete(self.diary[indexPath.item])
             guard let dataSource = self.dataSource,
                   let id = dataSource.itemIdentifier(for: indexPath) else {
                 return
