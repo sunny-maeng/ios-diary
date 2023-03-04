@@ -16,6 +16,8 @@
 		41BE025329533C9E006053FD /* RegisterDiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BE025229533C9E006053FD /* RegisterDiaryViewController.swift */; };
 		41BE53B329B2F6F600573524 /* MappingModelV1ToV2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 41BE53B229B2F6F600573524 /* MappingModelV1ToV2.xcmappingmodel */; };
 		41C61BCE29B34D85009E7040 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BCD29B34D85009E7040 /* WeatherInfo.swift */; };
+		41C61BD529B34E53009E7040 /* FetchDiariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */; };
+		41C61BD829B34F09009E7040 /* DiariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BD729B34F09009E7040 /* DiariesRepository.swift */; };
 		41C6A0FC295BDAD600304FC2 /* CustomActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C6A0FB295BDAD600304FC2 /* CustomActivityViewController.swift */; };
 		41E420812967D44000283FE5 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E420802967D44000283FE5 /* LocationManager.swift */; };
 		90203F9F2967C17F002901C1 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90203F9E2967C17F002901C1 /* CacheManager.swift */; };
@@ -47,6 +49,8 @@
 		41BE025229533C9E006053FD /* RegisterDiaryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterDiaryViewController.swift; sourceTree = "<group>"; };
 		41BE53B229B2F6F600573524 /* MappingModelV1ToV2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; name = MappingModelV1ToV2.xcmappingmodel; path = "../../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/ios-diary/Diary/Model/CoreData/MappingModelV1ToV2.xcmappingmodel"; sourceTree = "<group>"; };
 		41C61BCD29B34D85009E7040 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
+		41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDiariesUseCase.swift; sourceTree = "<group>"; };
+		41C61BD729B34F09009E7040 /* DiariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiariesRepository.swift; sourceTree = "<group>"; };
 		41C6A0FB295BDAD600304FC2 /* CustomActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomActivityViewController.swift; sourceTree = "<group>"; };
 		41E420802967D44000283FE5 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		449857F28E91002F94820D83 /* Pods-Diary.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diary.debug.xcconfig"; path = "Target Support Files/Pods-Diary/Pods-Diary.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,6 +123,8 @@
 			isa = PBXGroup;
 			children = (
 				41C61BCA29B34D53009E7040 /* Entity */,
+				41C61BD329B34E3D009E7040 /* UseCase */,
+				41C61BD629B34EF9009E7040 /* Interfaces */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -130,6 +136,22 @@
 				41C61BCD29B34D85009E7040 /* WeatherInfo.swift */,
 			);
 			path = Entity;
+			sourceTree = "<group>";
+		};
+		41C61BD329B34E3D009E7040 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		41C61BD629B34EF9009E7040 /* Interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				41C61BD729B34F09009E7040 /* DiariesRepository.swift */,
+			);
+			path = Interfaces;
 			sourceTree = "<group>";
 		};
 		41E420822967D47600283FE5 /* Weather */ = {
@@ -363,6 +385,7 @@
 				90203F9F2967C17F002901C1 /* CacheManager.swift in Sources */,
 				41E420812967D44000283FE5 /* LocationManager.swift in Sources */,
 				90DC5C8E2951CAF8003D6684 /* DiaryInfo.swift in Sources */,
+				41C61BD529B34E53009E7040 /* FetchDiariesUseCase.swift in Sources */,
 				41C6A0FC295BDAD600304FC2 /* CustomActivityViewController.swift in Sources */,
 				41BE53B329B2F6F600573524 /* MappingModelV1ToV2.xcmappingmodel in Sources */,
 				90B1922F2963EAD200DEEE10 /* WeatherManager.swift in Sources */,
@@ -370,6 +393,7 @@
 				90B1923329640DF700DEEE10 /* WeatherInfo_Before.swift in Sources */,
 				4174808C29592DDF00739399 /* CoreDataManager.swift in Sources */,
 				90B1923129640D9900DEEE10 /* DecodeManager.swift in Sources */,
+				41C61BD829B34F09009E7040 /* DiariesRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

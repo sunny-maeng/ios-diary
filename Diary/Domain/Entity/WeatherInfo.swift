@@ -2,7 +2,7 @@
 //  WeatherInfo.swift
 //  Diary
 //
-//  Created by 맹선아 on 2023/03/04.
+//  Created by 써니쿠키on 2023/03/04.
 //
 
 import Foundation
