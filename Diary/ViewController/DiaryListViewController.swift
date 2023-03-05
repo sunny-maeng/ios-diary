@@ -11,7 +11,8 @@ final class DiaryListViewController: UIViewController {
     private var diaryListView: DiaryListView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
     private var diary: [DiaryInfo] = []
-    private let weatherManager = WeatherManager()
+    private let weatherManager = WeatherManager(locationManager: LocationManager(),
+                                                networkSessionManager: DefaultNetworkSessionManager())
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,15 +49,20 @@ final class DiaryListViewController: UIViewController {
             if let cachedImage: UIImage = ImageCacheManager.shared.object(forKey: cacheKey) {
                 cell.configureWeatherIcon(weatherIcon: cachedImage)
             } else {
-                self.weatherManager.fetchWeatherIcon(icon: diaryInfoWeather.icon) { weatherIcon in
-                    guard let weatherIcon = weatherIcon else {
-                        return
+                do {
+                    try self.weatherManager.fetchWeatherIcon(icon: diaryInfoWeather.icon) { weatherIcon in
+                        guard let weatherIcon = weatherIcon else {
+                            return
+                        }
+                        cell.configureWeatherIcon(weatherIcon: weatherIcon)
+                        ImageCacheManager.shared.setObject(weatherIcon, forKey: cacheKey)
                     }
-                    cell.configureWeatherIcon(weatherIcon: weatherIcon)
-                    ImageCacheManager.shared.setObject(weatherIcon, forKey: cacheKey)
+                } catch {
+                    print(error.localizedDescription)
                 }
             }
         }
+
         
         guard let diaryListView = diaryListView,
             let diaryListView = diaryListView.diaryList else {
@@ -105,14 +111,14 @@ extension DiaryListViewController {
         self.navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
-    @objc private func registerDiary() {
-        weatherManager.fetchWeatherInfo { weatherInfo in
+    @objc private func registerDiary() throws {
+        try weatherManager.fetchWeatherInfo { weatherInfo in
             let registerDiaryViewController = RegisterDiaryViewController(
                 diaryInfo: DiaryInfo(title: Constant.empty,
                                      body: Constant.empty,
                                      createdAt: Date(),
                                      weather: weatherInfo))
-            
+
             self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
         }
     }

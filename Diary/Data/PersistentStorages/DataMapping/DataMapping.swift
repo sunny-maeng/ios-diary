@@ -10,15 +10,15 @@ import CoreData
 
 struct DataMapping {
 
-    func coreDataEntityToDomain(from coreDataEntity: Diary) -> DiaryInfo {
+    func coreDataDiaryEntityToDomain(from coreDataEntity: Diary) -> DiaryInfo {
         return .init(title: coreDataEntity.title ?? "",
                      body: coreDataEntity.body ?? "",
                      createdAt: coreDataEntity.createdAt ?? Date(),
-                     weather: coreDataEntity.weather?.weatherInfo,
+                     weather: coreDataWeatherEntityToDomain(from: coreDataEntity.weather),
                      id: coreDataEntity.id ?? UUID())
     }
 
-    func domainToCoreDataEntity(from domain: DiaryInfo, coreStorageContext: NSManagedObjectContext) -> Diary {
+    func domainToCoreDataDairyEntity(from domain: DiaryInfo, coreStorageContext: NSManagedObjectContext) -> Diary {
         let diaryEntity = Diary(context: coreStorageContext)
         diaryEntity.title = domain.title
         diaryEntity.body = domain.body
@@ -31,6 +31,15 @@ struct DataMapping {
         diaryEntity.weather = weatherEntity
 
         return diaryEntity
+    }
+
+    func coreDataWeatherEntityToDomain(from weatherEntity: Weather?) -> WeatherInfo? {
+        guard let main = weatherEntity?.main,
+              let icon = weatherEntity?.icon else {
+            return nil
+        }
+
+        return .init(main: main, icon: icon)
     }
 
 }

@@ -25,7 +25,7 @@ extension CoreDataDiaryInfoCRUDStorage: DiaryInfoCRUDableStorage {
     func save(_ diaryInfo: DiaryInfo) {
         guard searchDiary(using: diaryInfo.id).first == nil else { return }
 
-        let diaryEntity = dataMapping.domainToCoreDataEntity(from: diaryInfo,
+        let diaryEntity = dataMapping.domainToCoreDataDairyEntity(from: diaryInfo,
                                                              coreStorageContext: coreDataStorage.context)
         coreDataStorage.saveContext()
     }
@@ -40,7 +40,7 @@ extension CoreDataDiaryInfoCRUDStorage: DiaryInfoCRUDableStorage {
         do {
             let fetchedData = try coreDataStorage.context.fetch(request)
             fetchedData.forEach { diaryEntity in
-                diaryList.append(dataMapping.coreDataEntityToDomain(from: diaryEntity))
+                diaryList.append(dataMapping.coreDataDiaryEntityToDomain(from: diaryEntity))
             }
         } catch {
             print(error.localizedDescription)

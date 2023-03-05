@@ -9,39 +9,42 @@ import UIKit
 
 final class WeatherManager {
    
-    private let locationManager = LocationManager()
+    private let locationManager: LocationManager
+    private let networkSessionManager: NetworkSessionManager
+
     private var location: (latitude: Double, longitude: Double) {
         locationManager.fetchLocation()
     }
+
+    init(locationManager: LocationManager, networkSessionManager: NetworkSessionManager) {
+        self.locationManager = locationManager
+        self.networkSessionManager = networkSessionManager
+    }
     
-    func fetchWeatherInfo(completion: @escaping (WeatherInfo?) -> Void) {
-        guard let url = WeatherURL.currentWeatherData(latitude: location.latitude,
-                                                      longitude: location.longitude).url else {
-            return
-        }
-        
-        URLSessionProvider().fetchData(url: url) { result in
+    func fetchWeatherInfo(completion: @escaping (WeatherInfo?) -> Void) throws {
+        let url = try APIEndpoints.generateCurrentWeatherDataUrl(
+            at: APIEndpoints.Location(latitude: location.latitude, longitude: location.longitude))
+
+        networkSessionManager.fetchData(url: url) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
-                    guard let decodedWeather = DecodeManager.decodeWeatherData(data) else {
+                    guard let decodedWeather = DecodeManager.decodeWeatherData(data)?.toDomain() else {
                         completion(nil)
                         return
                     }
                     completion(decodedWeather)
                 }
             case .failure(let error):
-                print(error.localizedDescription)
+                print(error)
             }
         }
     }
     
-    func fetchWeatherIcon(icon: String, completion: @escaping (UIImage?) -> Void) {
-        guard let url = WeatherURL.weatherIcon(icon: icon).url else {
-            return
-        }
+    func fetchWeatherIcon(icon: String, completion: @escaping (UIImage?) -> Void) throws {
+        let url = try APIEndpoints.generateWeatherIconUrl(iconName: icon)
         
-        URLSessionProvider().fetchData(url: url) { result in
+        networkSessionManager.fetchData(url: url) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {
