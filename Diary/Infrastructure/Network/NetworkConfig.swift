@@ -9,21 +9,21 @@ import Foundation
 
 protocol NetworkConfigurable {
 
-    var baseURL: URL { get }
+    var baseURL: String { get }
     var path: [String]? { get }
-    var queryItems: [URLQueryItem]? { get }
+    var queryItems: [(name: String, value: String)]? { get }
 
 }
 
 struct ApiDataNetworkConfig: NetworkConfigurable {
 
-    var baseURL: URL
+    var baseURL: String
     var path: [String]?
-    var queryItems: [URLQueryItem]?
+    var queryItems: [(name: String, value: String)]?
 
-    init(baseURL: URL,
+    init(baseURL: String,
          path: [String]? = nil,
-         queryItems: [URLQueryItem]?) {
+         queryItems: [(name: String, value: String)]?) {
         self.baseURL = baseURL
         self.path = path
         self.queryItems = queryItems

@@ -9,44 +9,25 @@ import Foundation
 
 struct APIEndpoints {
 
-    final class Location {
-        let latitude: Double
-        let longitude: Double
-
-        init(latitude: Double, longitude: Double) {
-            self.latitude = latitude
-            self.longitude = longitude
-        }
-    }
-
-    static func generateCurrentWeatherDataUrl(at location: Location) throws -> URL {
-        let apiKey = Bundle.main.apiKey
-
-        guard let baseURL = URL(string: "https://api.openweathermap.org") else {
-            throw NetworkError.generateUrlFailError
-        }
-
+    static func getCurrentWeatherData(at location: Location) -> EndPoint {
         let apiDataNetworkConfig = ApiDataNetworkConfig(
-            baseURL: baseURL,
+            baseURL: "https://api.openweathermap.org",
             path: ["data", "2.5", "weather"],
-            queryItems: [URLQueryItem(name: "lat", value: String(location.latitude)),
-                         URLQueryItem(name: "lon", value: String(location.longitude)),
-                         URLQueryItem(name: "appid", value: apiKey)
-                        ])
+            queryItems: [(name: "lat", value: String(location.latitude)),
+                         (name: "lon", value: String(location.longitude)),
+                         (name: "appid", value: Bundle.main.apiKey)
+                                                                    ])
 
-        return try EndPoint.url(with: apiDataNetworkConfig)
+        return EndPoint(config: apiDataNetworkConfig)
     }
 
-    static func generateWeatherIconUrl(iconName: String) throws -> URL {
-        guard let baseURL = URL(string: "https://openweathermap.org") else {
-            throw NetworkError.generateUrlFailError
-        }
+    static func getWeatherIcon(iconName: String) -> EndPoint {
+        let apiDataNetworkConfig = ApiDataNetworkConfig(
+            baseURL: "https://openweathermap.org",
+            path: ["img", "wn", "\(iconName)@2x.png"],
+            queryItems: nil)
 
-        let apiDataNetworkConfig = ApiDataNetworkConfig( baseURL: baseURL,
-                                                         path: ["img", "wn", "\(iconName)@2x.png"],
-                                                         queryItems: nil)
-
-        return try EndPoint.url(with: apiDataNetworkConfig)
+        return EndPoint(config: apiDataNetworkConfig)
     }
 
 }

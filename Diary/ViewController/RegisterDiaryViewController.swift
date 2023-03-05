@@ -25,7 +25,7 @@ class RegisterDiaryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view = diaryDetailView
-        CoreDataDiaryInfoCRUDStorage().save(diaryInfo)
+        CoreDataDiaryCRUDStorage().save(diaryInfo)
         diaryDetailView.addTextViewsDelegate(self)
         setupNavigationBar()
         setupNotification()
@@ -45,7 +45,7 @@ class RegisterDiaryViewController: UIViewController {
     @objc private func updateDiary() {
         diaryInfo.title = diaryDetailView.title
         diaryInfo.body = diaryDetailView.body
-        CoreDataDiaryInfoCRUDStorage().update(diaryInfo)
+        CoreDataDiaryCRUDStorage().update(diaryInfo)
     }
     
     func setupNavigationBar() {

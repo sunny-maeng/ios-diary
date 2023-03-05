@@ -9,10 +9,18 @@ import Foundation
 
 final class EndPoint {
 
-    static func url(with config: ApiDataNetworkConfig) throws -> URL {
-        let baseURL = config.baseURL.description
-        
-        guard var urlComponents = URLComponents(string: baseURL) else {
+    private let config: NetworkConfigurable
+
+    init(config: NetworkConfigurable) {
+        self.config = config
+    }
+
+    func url() throws -> URL {
+        guard let baseURL = URL(string: config.baseURL) else {
+            throw NetworkError.generateUrlFailError
+        }
+   
+        guard var urlComponents = URLComponents(string: baseURL.description) else {
             throw NetworkError.generateUrlFailError
         }
 
@@ -23,7 +31,11 @@ final class EndPoint {
         }
 
         if let queryItems = config.queryItems {
-            urlComponents.queryItems = queryItems
+            let items: [URLQueryItem] = queryItems.map { (name, value) in
+                URLQueryItem(name: name, value: value)
+            }
+
+            urlComponents.queryItems = items
         }
 
         guard let url = urlComponents.url else {

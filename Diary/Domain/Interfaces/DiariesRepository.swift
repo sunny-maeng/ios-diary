@@ -10,6 +10,8 @@ import Foundation
 protocol DiariesRepository {
 
     func fetchDiaries(completion: @escaping (Result<[DiaryInfo], Error>) -> Void)
-    func save()
-
+    func save(diaryInfo: DiaryInfo)
+    func update(diaryInfo: DiaryInfo)
+    func delete(diaryInfo: DiaryInfo)
+    
 }

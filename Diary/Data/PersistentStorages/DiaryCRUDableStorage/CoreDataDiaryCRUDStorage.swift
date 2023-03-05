@@ -1,5 +1,5 @@
 //
-//  CoreDataDiaryCRUDableStorage.swift
+//  CoreDataDiaryCRUDStorage.swift
 //  Diary
 //
 //  Created by 써니쿠키 on 2023/03/04.
@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-final class CoreDataDiaryInfoCRUDStorage {
+final class CoreDataDiaryCRUDStorage {
 
     private let coreDataStorage: CoreDataStorage
     private let dataMapping: DataMapping
@@ -20,7 +20,7 @@ final class CoreDataDiaryInfoCRUDStorage {
     }
 }
 
-extension CoreDataDiaryInfoCRUDStorage: DiaryInfoCRUDableStorage {
+extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
 
     func save(_ diaryInfo: DiaryInfo) {
         guard searchDiary(using: diaryInfo.id).first == nil else { return }
@@ -30,7 +30,7 @@ extension CoreDataDiaryInfoCRUDStorage: DiaryInfoCRUDableStorage {
         coreDataStorage.saveContext()
     }
 
-    func fetchDiaries() -> [DiaryInfo] {
+    func fetchDiaries(completion: @escaping(Result<[DiaryInfo], Error>) -> Void) {
         deleteAllNoDataDiaries()
 
         var diaryList: [DiaryInfo] = []
@@ -43,10 +43,10 @@ extension CoreDataDiaryInfoCRUDStorage: DiaryInfoCRUDableStorage {
                 diaryList.append(dataMapping.coreDataDiaryEntityToDomain(from: diaryEntity))
             }
         } catch {
-            print(error.localizedDescription)
+            completion(.failure(error))
         }
 
-        return diaryList
+        completion(.success(diaryList))
     }
 
     func update(_ diaryInfo: DiaryInfo) {
@@ -114,7 +114,7 @@ extension CoreDataDiaryInfoCRUDStorage: DiaryInfoCRUDableStorage {
 
 }
 
-extension CoreDataDiaryInfoCRUDStorage {
+extension CoreDataDiaryCRUDStorage {
 
     private enum Constant {
         static let diaryContainer = "Diary"

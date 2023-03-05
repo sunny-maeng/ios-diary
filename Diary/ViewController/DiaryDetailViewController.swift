@@ -80,7 +80,7 @@ extension DiaryDetailViewController {
                                                 style: .cancel))
         alertController.addAction(UIAlertAction(title: Constant.alertActionOkTitle,
                                                 style: .destructive) { _ in
-            CoreDataDiaryInfoCRUDStorage().delete(self.diaryInfo)
+            CoreDataDiaryCRUDStorage().delete(self.diaryInfo)
             self.navigationController?.popViewController(animated: true)
         })
         

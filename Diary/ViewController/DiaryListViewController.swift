@@ -11,9 +11,9 @@ final class DiaryListViewController: UIViewController {
     private var diaryListView: DiaryListView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
     private var diary: [DiaryInfo] = []
-    private let weatherManager = WeatherManager(locationManager: LocationManager(),
-                                                networkSessionManager: DefaultNetworkSessionManager())
-    
+    private let weatherInfoRepository: WeatherInfoRepository = DefaultWeatherInfoRepository()
+    private let weatherIconRepository: WeatherIconRepository = DefaultWeatherIconRepository()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         diaryListView = DiaryListView()
@@ -30,7 +30,14 @@ final class DiaryListViewController: UIViewController {
     }
     
     private func convertDiaryData() {
-        diary = CoreDataDiaryInfoCRUDStorage().fetchDiaries()
+        CoreDataDiaryCRUDStorage().fetchDiaries { [weak self] result in
+            switch result {
+            case .success(let diaries):
+                self?.diary = diaries
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
     
     private func configureDiaryListDataSource() {
@@ -49,16 +56,15 @@ final class DiaryListViewController: UIViewController {
             if let cachedImage: UIImage = ImageCacheManager.shared.object(forKey: cacheKey) {
                 cell.configureWeatherIcon(weatherIcon: cachedImage)
             } else {
-                do {
-                    try self.weatherManager.fetchWeatherIcon(icon: diaryInfoWeather.icon) { weatherIcon in
-                        guard let weatherIcon = weatherIcon else {
-                            return
-                        }
+                self.weatherIconRepository.fetchWeatherIcon(icon: diaryInfoWeather.icon) { result in
+                    switch result {
+                    case .success(let data):
+                        guard let weatherIcon = UIImage(data: data) else { return }
                         cell.configureWeatherIcon(weatherIcon: weatherIcon)
                         ImageCacheManager.shared.setObject(weatherIcon, forKey: cacheKey)
+                    case .failure(let error):
+                        print(error)
                     }
-                } catch {
-                    print(error.localizedDescription)
                 }
             }
         }
@@ -111,15 +117,20 @@ extension DiaryListViewController {
         self.navigationItem.rightBarButtonItem = addBarButtonItem
     }
     
-    @objc private func registerDiary() throws {
-        try weatherManager.fetchWeatherInfo { weatherInfo in
-            let registerDiaryViewController = RegisterDiaryViewController(
-                diaryInfo: DiaryInfo(title: Constant.empty,
-                                     body: Constant.empty,
-                                     createdAt: Date(),
-                                     weather: weatherInfo))
+    @objc private func registerDiary() {
+        weatherInfoRepository.fetchWeatherInfo { (result: Result<WeatherInfo, Error>) in
+            switch result {
+            case .success(let weatherInfo):
+                let registerDiaryViewController = RegisterDiaryViewController(
+                                    diaryInfo: DiaryInfo(title: Constant.empty,
+                                                         body: Constant.empty,
+                                                         createdAt: Date(),
+                                                         weather: weatherInfo))
 
-            self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
+                self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
+            case .failure(let error):
+                print(error)
+            }
         }
     }
 }
@@ -140,7 +151,7 @@ extension DiaryListViewController: DiaryListViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: Constant.deleteActionTitle) {
             _, _, handler in
-            CoreDataDiaryInfoCRUDStorage().delete(self.diary[indexPath.item])
+            CoreDataDiaryCRUDStorage().delete(self.diary[indexPath.item])
             guard let dataSource = self.dataSource,
                   let id = dataSource.itemIdentifier(for: indexPath) else {
                 return

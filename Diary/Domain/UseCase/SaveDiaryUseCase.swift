@@ -7,18 +7,16 @@
 
 import Foundation
 
-final class DefaultFetchDiariesUseCase: FetchDiariesUseCase {
+final class DefaultFetchDiariesUseCase: SaveDiaryUseCase {
 
-    var diariesRepository: DiariesRepository
+    private let diariesRepository: DiariesRepository
 
     init(diariesRepository: DiariesRepository) {
         self.diariesRepository = diariesRepository
     }
 
-    func fetch(completion: @escaping (Result<[DiaryInfo], Error>) -> Void) {
-        diariesRepository.fetchDiaries { result in
-            completion(result)
-        }
+    func save(diaryInfo: DiaryInfo) {
+        diariesRepository.save(diaryInfo: diaryInfo)
     }
 
 }

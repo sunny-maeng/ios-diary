@@ -7,19 +7,23 @@
 
 import Foundation
 
-protocol NetworkSessionManager {
+protocol NetworkService {
 
     typealias CompletionHandler = (Result<Data, NetworkError>) -> Void
 
-    func fetchData(url: URL, completion: @escaping CompletionHandler)
+    func request(endpoint: EndPoint, completion: @escaping CompletionHandler)
+
 }
 
-class DefaultNetworkSessionManager: NetworkSessionManager {
+final class DefaultNetworkService: NetworkService {
 
-    let session = URLSession.shared
+    private let session: URLSession
 
-    func fetchData(url: URL,
-                   completion: @escaping (Result<Data, NetworkError>) -> Void) {
+    init(session: URLSession = URLSession.shared) {
+        self.session = session
+    }
+
+    private func fetchData(url: URL, completion: @escaping CompletionHandler) {
         session.dataTask(with: url) { data, response, error in
             guard error == nil else {
                 completion(.failure(.requestFailError))
@@ -40,6 +44,21 @@ class DefaultNetworkSessionManager: NetworkSessionManager {
 
             completion(.success(data))
         }.resume()
+    }
+
+}
+
+extension DefaultNetworkService {
+
+    func request(endpoint: EndPoint, completion: @escaping CompletionHandler) {
+        do {
+            let url = try endpoint.url()
+            fetchData(url: url) { result in
+                completion(result)
+            }
+        } catch {
+            completion(.failure(.requestFailError))
+        }
     }
 
 }
