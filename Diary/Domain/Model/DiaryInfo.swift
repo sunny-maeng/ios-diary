@@ -14,6 +14,5 @@ struct DiaryInfo: Hashable {
     let createdAt: Date
     let weather: WeatherInfo?
     var id = UUID()
-    var createdDate: String { createdAt.localizedDateFormat }
-    
+    var createdDate: String { createdAt.localizedDateFormat } // ⭐️MVVM적용시 이동
 }

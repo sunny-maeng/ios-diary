@@ -9,12 +9,12 @@ import UIKit
 
 final class DiaryDetailView: UIView {
     
-    private let titleTextView = CustomTextView(font: .title1)
-    private let bodyTextView = CustomTextView(font: .body)
-    private let titlePlaceHolder = CustomLabel(text: Constant.titlePlaceHolder,
+    private let titleTextView = UITextView(font: .title1)
+    private let bodyTextView = UITextView(font: .body)
+    private let titlePlaceHolder = UILabel(text: Constant.titlePlaceHolder,
                                                textColor: .systemGray2,
                                                font: .title1)
-    private let bodyPlaceHolder = CustomLabel(text: Constant.bodyPlaceHolder,
+    private let bodyPlaceHolder = UILabel(text: Constant.bodyPlaceHolder,
                                               textColor: .systemGray2,
                                               font: .body)
     

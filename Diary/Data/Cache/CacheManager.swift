@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class ImageCacheManager {
+final class ImageCacheManager { //⭐️ 계층분리하기
     
     static let shared = NSCache<NSString, UIImage>()
     

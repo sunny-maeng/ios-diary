@@ -21,6 +21,8 @@
 		411D3C5829B4C12F0063F14B /* MappintModelV1ToV2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 411D3C5729B4C12F0063F14B /* MappintModelV1ToV2.xcmappingmodel */; };
 		411D3C5C29B4C9490063F14B /* Date+localizedDateFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D3C5B29B4C9490063F14B /* Date+localizedDateFormat.swift */; };
 		4162BF6029B70A8100EC9FC0 /* WeatherAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BF5F29B70A8100EC9FC0 /* WeatherAPI.swift */; };
+		4162BF6829B7198B00EC9FC0 /* DiaryListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BF6729B7198B00EC9FC0 /* DiaryListViewModel.swift */; };
+		4162BF6C29B719FF00EC9FC0 /* UILabel+ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162BF6B29B719FF00EC9FC0 /* UILabel+ConvenienceInit.swift */; };
 		4181DFD029B37F9100A3AB26 /* NetworkServie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181DFCF29B37F9100A3AB26 /* NetworkServie.swift */; };
 		4181DFD229B37F9B00A3AB26 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181DFD129B37F9B00A3AB26 /* EndPoint.swift */; };
 		4181DFD429B381DF00A3AB26 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181DFD329B381DF00A3AB26 /* NetworkConfig.swift */; };
@@ -43,7 +45,7 @@
 		90B1923129640D9900DEEE10 /* DecodeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B1923029640D9900DEEE10 /* DecodeManager.swift */; };
 		90DC5C8829519711003D6684 /* DiaryListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC5C8729519711003D6684 /* DiaryListView.swift */; };
 		90DC5C8A2951A059003D6684 /* DiaryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC5C892951A059003D6684 /* DiaryCell.swift */; };
-		90DC5C8C2951A6E1003D6684 /* CustomUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC5C8B2951A6E1003D6684 /* CustomUI.swift */; };
+		90DC5C8C2951A6E1003D6684 /* UITextView+ConvenienceInit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC5C8B2951A6E1003D6684 /* UITextView+ConvenienceInit.swift */; };
 		90DC5C8E2951CAF8003D6684 /* DiaryInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90DC5C8D2951CAF8003D6684 /* DiaryInfo.swift */; };
 		C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739AE24284DF28600741E8F /* AppDelegate.swift */; };
 		C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C739AE26284DF28600741E8F /* SceneDelegate.swift */; };
@@ -68,6 +70,8 @@
 		411D3C5729B4C12F0063F14B /* MappintModelV1ToV2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = MappintModelV1ToV2.xcmappingmodel; sourceTree = "<group>"; };
 		411D3C5B29B4C9490063F14B /* Date+localizedDateFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+localizedDateFormat.swift"; sourceTree = "<group>"; };
 		4162BF5F29B70A8100EC9FC0 /* WeatherAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherAPI.swift; sourceTree = "<group>"; };
+		4162BF6729B7198B00EC9FC0 /* DiaryListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListViewModel.swift; sourceTree = "<group>"; };
+		4162BF6B29B719FF00EC9FC0 /* UILabel+ConvenienceInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+ConvenienceInit.swift"; sourceTree = "<group>"; };
 		4181DFCF29B37F9100A3AB26 /* NetworkServie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServie.swift; sourceTree = "<group>"; };
 		4181DFD129B37F9B00A3AB26 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		4181DFD329B381DF00A3AB26 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
@@ -92,7 +96,7 @@
 		90B1923029640D9900DEEE10 /* DecodeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecodeManager.swift; sourceTree = "<group>"; };
 		90DC5C8729519711003D6684 /* DiaryListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryListView.swift; sourceTree = "<group>"; };
 		90DC5C892951A059003D6684 /* DiaryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCell.swift; sourceTree = "<group>"; };
-		90DC5C8B2951A6E1003D6684 /* CustomUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomUI.swift; sourceTree = "<group>"; };
+		90DC5C8B2951A6E1003D6684 /* UITextView+ConvenienceInit.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextView+ConvenienceInit.swift"; sourceTree = "<group>"; };
 		90DC5C8D2951CAF8003D6684 /* DiaryInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryInfo.swift; sourceTree = "<group>"; };
 		C739AE21284DF28600741E8F /* Diary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Diary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C739AE24284DF28600741E8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -170,6 +174,75 @@
 			path = DecodeManager;
 			sourceTree = "<group>";
 		};
+		4162BF6129B716F000EC9FC0 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				4162BF6929B719BB00EC9FC0 /* Utils */,
+				4162BF6229B7170A00EC9FC0 /* DiariesScene */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		4162BF6229B7170A00EC9FC0 /* DiariesScene */ = {
+			isa = PBXGroup;
+			children = (
+				4162BF6429B7194500EC9FC0 /* DiaryList */,
+			);
+			path = DiariesScene;
+			sourceTree = "<group>";
+		};
+		4162BF6329B7173800EC9FC0 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				90203F9E2967C17F002901C1 /* CacheManager.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		4162BF6429B7194500EC9FC0 /* DiaryList */ = {
+			isa = PBXGroup;
+			children = (
+				4162BF6629B7196B00EC9FC0 /* ViewModel */,
+				4162BF6529B7196600EC9FC0 /* View */,
+			);
+			path = DiaryList;
+			sourceTree = "<group>";
+		};
+		4162BF6529B7196600EC9FC0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C739AE28284DF28600741E8F /* DiaryListViewController.swift */,
+				90DC5C8729519711003D6684 /* DiaryListView.swift */,
+				90DC5C892951A059003D6684 /* DiaryCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		4162BF6629B7196B00EC9FC0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				4162BF6729B7198B00EC9FC0 /* DiaryListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		4162BF6929B719BB00EC9FC0 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4162BF6A29B719CA00EC9FC0 /* Extension */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4162BF6A29B719CA00EC9FC0 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				90DC5C8B2951A6E1003D6684 /* UITextView+ConvenienceInit.swift */,
+				4162BF6B29B719FF00EC9FC0 /* UILabel+ConvenienceInit.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		41A52ED329B3730100D970FF /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,7 +274,6 @@
 		41AF40FF2952DD1400AC33CE /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				C739AE28284DF28600741E8F /* DiaryListViewController.swift */,
 				41BE025229533C9E006053FD /* RegisterDiaryViewController.swift */,
 				905456F12952CCF200AAFEB0 /* DiaryDetailViewController.swift */,
 				41C6A0FB295BDAD600304FC2 /* CustomActivityViewController.swift */,
@@ -209,18 +281,10 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
-		41AF41002952DD2D00AC33CE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				41E420862967D9EB00283FE5 /* Support */,
-			);
-			path = Model;
-			sourceTree = "<group>";
-		};
 		41C61BC929B34D45009E7040 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
-				41C61BCA29B34D53009E7040 /* Entity */,
+				41C61BCA29B34D53009E7040 /* Model */,
 				41C61BD329B34E3D009E7040 /* UseCase */,
 				41C61BD629B34EF9009E7040 /* Interfaces */,
 				411D3C5929B4C9160063F14B /* Utils */,
@@ -228,13 +292,13 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		41C61BCA29B34D53009E7040 /* Entity */ = {
+		41C61BCA29B34D53009E7040 /* Model */ = {
 			isa = PBXGroup;
 			children = (
 				90DC5C8D2951CAF8003D6684 /* DiaryInfo.swift */,
 				41C61BCD29B34D85009E7040 /* WeatherInfo.swift */,
 			);
-			path = Entity;
+			path = Model;
 			sourceTree = "<group>";
 		};
 		41C61BD329B34E3D009E7040 /* UseCase */ = {
@@ -272,6 +336,7 @@
 				411D3C4029B485260063F14B /* Repositories */,
 				41A52ED329B3730100D970FF /* Network */,
 				41C61BF329B35BB2009E7040 /* PersistentStorages */,
+				4162BF6329B7173800EC9FC0 /* Cache */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -312,14 +377,6 @@
 			path = DataMapping;
 			sourceTree = "<group>";
 		};
-		41E420862967D9EB00283FE5 /* Support */ = {
-			isa = PBXGroup;
-			children = (
-				90203F9E2967C17F002901C1 /* CacheManager.swift */,
-			);
-			path = Support;
-			sourceTree = "<group>";
-		};
 		4582CA22E5D5A4391BE472A1 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -340,10 +397,7 @@
 		905456F02952CC2700AAFEB0 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				90DC5C8729519711003D6684 /* DiaryListView.swift */,
-				90DC5C892951A059003D6684 /* DiaryCell.swift */,
 				905456EE2952CC1900AAFEB0 /* DiaryDetailView.swift */,
-				90DC5C8B2951A6E1003D6684 /* CustomUI.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -370,12 +424,12 @@
 		C739AE23284DF28600741E8F /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				4162BF6129B716F000EC9FC0 /* Presentation */,
 				C739AE24284DF28600741E8F /* AppDelegate.swift */,
 				C739AE26284DF28600741E8F /* SceneDelegate.swift */,
 				41C61BC929B34D45009E7040 /* Domain */,
 				41C61BF229B35BA6009E7040 /* Data */,
 				41A52ED729B37EF200D970FF /* Infrastructure */,
-				41AF41002952DD2D00AC33CE /* Model */,
 				905456F02952CC2700AAFEB0 /* View */,
 				41AF40FF2952DD1400AC33CE /* ViewController */,
 				C739AE30284DF28600741E8F /* Assets.xcassets */,
@@ -516,13 +570,15 @@
 				C739AE25284DF28600741E8F /* AppDelegate.swift in Sources */,
 				C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */,
 				41BE025329533C9E006053FD /* RegisterDiaryViewController.swift in Sources */,
-				90DC5C8C2951A6E1003D6684 /* CustomUI.swift in Sources */,
+				90DC5C8C2951A6E1003D6684 /* UITextView+ConvenienceInit.swift in Sources */,
 				411D3C5C29B4C9490063F14B /* Date+localizedDateFormat.swift in Sources */,
 				41A52ED229B371FE00D970FF /* DataMapping.swift in Sources */,
+				4162BF6C29B719FF00EC9FC0 /* UILabel+ConvenienceInit.swift in Sources */,
 				4181DFD029B37F9100A3AB26 /* NetworkServie.swift in Sources */,
 				90DC5C8A2951A059003D6684 /* DiaryCell.swift in Sources */,
 				90DC5C8829519711003D6684 /* DiaryListView.swift in Sources */,
 				905456EF2952CC1900AAFEB0 /* DiaryDetailView.swift in Sources */,
+				4162BF6829B7198B00EC9FC0 /* DiaryListViewModel.swift in Sources */,
 				411D3C4229B485610063F14B /* DefaultDiariesRepository.swift in Sources */,
 				411D3C5029B497A10063F14B /* Location.swift in Sources */,
 				411D3C4D29B496000063F14B /* LocationManager.swift in Sources */,

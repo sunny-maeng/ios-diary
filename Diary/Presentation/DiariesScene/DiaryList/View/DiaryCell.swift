@@ -9,9 +9,9 @@ import UIKit
 
 final class DiaryCell: UICollectionViewListCell {
     
-    private let titleLabel = CustomLabel()
-    private let dateLabel = CustomLabel(font: .subheadline)
-    private let previewLabel = CustomLabel(font: .caption2)
+    private let titleLabel = UILabel()
+    private let dateLabel = UILabel(font: .subheadline)
+    private let previewLabel = UILabel(font: .caption2)
     private var weatherIconView: UIImageView = {
         let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
