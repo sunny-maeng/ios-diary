@@ -9,11 +9,11 @@ import UIKit
 
 final class DecodeManager {
     
-    static func decodeWeatherData(_ data: Data) -> WeatherResponseDTO? {
+    static func decodeWeatherData<T: Decodable>(_ data: Data, to type: T.Type) -> T? {
         let decoder = JSONDecoder()
         
         do {
-            let decodedData = try decoder.decode(WeatherResponseDTO.self, from: data)
+            let decodedData = try decoder.decode(T.self, from: data)
             return decodedData
         } catch let DecodingError.dataCorrupted(context) {
             print(context)

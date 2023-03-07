@@ -7,8 +7,8 @@
 
 import Foundation
 
-protocol WeatherIconRepository {
+protocol WeatherRepository {
 
-    func fetchWeatherIcon(icon: String, completion: @escaping (Result<Data, Error>) -> Void)
-
+    func fetchWeatherInfo(completion: @escaping (Result<WeatherInfo, Error>) -> Void)
+    func fetchWeatherIcon(iconName: String, completion: @escaping (Result<Data, Error>) -> Void)
 }

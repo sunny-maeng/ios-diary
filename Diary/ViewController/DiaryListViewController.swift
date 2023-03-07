@@ -11,8 +11,7 @@ final class DiaryListViewController: UIViewController {
     private var diaryListView: DiaryListView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
     private var diary: [DiaryInfo] = []
-    private let weatherInfoRepository: WeatherInfoRepository = DefaultWeatherInfoRepository()
-    private let weatherIconRepository: WeatherIconRepository = DefaultWeatherIconRepository()
+    private let weatherRepository: WeatherRepository = DefaultWeatherRepository()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +55,7 @@ final class DiaryListViewController: UIViewController {
             if let cachedImage: UIImage = ImageCacheManager.shared.object(forKey: cacheKey) {
                 cell.configureWeatherIcon(weatherIcon: cachedImage)
             } else {
-                self.weatherIconRepository.fetchWeatherIcon(icon: diaryInfoWeather.icon) { result in
+                self.weatherRepository.fetchWeatherIcon(iconName: diaryInfoWeather.icon) { result in
                     switch result {
                     case .success(let data):
                         guard let weatherIcon = UIImage(data: data) else { return }
@@ -69,7 +68,6 @@ final class DiaryListViewController: UIViewController {
             }
         }
 
-        
         guard let diaryListView = diaryListView,
             let diaryListView = diaryListView.diaryList else {
             return
@@ -118,7 +116,7 @@ extension DiaryListViewController {
     }
     
     @objc private func registerDiary() {
-        weatherInfoRepository.fetchWeatherInfo { (result: Result<WeatherInfo, Error>) in
+        weatherRepository.fetchWeatherInfo { (result: Result<WeatherInfo, Error>) in
             switch result {
             case .success(let weatherInfo):
                 let registerDiaryViewController = RegisterDiaryViewController(
