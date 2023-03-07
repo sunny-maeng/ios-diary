@@ -7,10 +7,10 @@
 import UIKit
 
 final class DiaryListViewController: UIViewController {
-    
+
     private var diaryListView: DiaryListView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
-    private var diary: [DiaryInfo] = []
+
     private let weatherRepository: WeatherRepository = DefaultWeatherRepository()
 
     override func viewDidLoad() {
@@ -29,14 +29,14 @@ final class DiaryListViewController: UIViewController {
     }
     
     private func convertDiaryData() {
-        CoreDataDiaryCRUDStorage().fetchDiaries { [weak self] result in
-            switch result {
-            case .success(let diaries):
-                self?.diary = diaries
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        CoreDataDiaryCRUDStorage().fetchDiaries { [weak self] result in
+//            switch result {
+//            case .success(let diaries):
+//                self?.diary = diaries
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
     }
     
     private func configureDiaryListDataSource() {
