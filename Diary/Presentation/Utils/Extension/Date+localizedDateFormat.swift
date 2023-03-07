@@ -2,12 +2,12 @@
 //  Date+localizedDateFormat.swift
 //  Diary
 //
-//  Created by 써니쿠키 on 2023/03/05.
+//  Created by 맹선아 on 2023/03/07.
 //
 
 import Foundation
 
-extension Date { //⭐️폴더 이동 예정
+extension Date {
 
     var localizedDateFormat: String {
         return DateFormatter.localizedString(from: self, dateStyle: .long, timeStyle: .none)

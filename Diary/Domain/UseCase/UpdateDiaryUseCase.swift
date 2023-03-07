@@ -11,7 +11,7 @@ final class DefaultUpdateDiariesUseCase: UpdateDiaryUseCase {
 
     private let diariesRepository: DiariesRepository
 
-    init(diariesRepository: DiariesRepository) {
+    init(diariesRepository: DiariesRepository = DefaultDiariesRepository()) {
         self.diariesRepository = diariesRepository
     }
 

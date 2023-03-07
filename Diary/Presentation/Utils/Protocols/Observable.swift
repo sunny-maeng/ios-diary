@@ -11,7 +11,7 @@ final class Observable<Value> {
 
     private var listener: ((Value) -> Void)?
 
-    private var value: Value {
+    var value: Value {
         didSet {
             listener?(value)
         }

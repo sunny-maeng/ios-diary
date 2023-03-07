@@ -67,7 +67,7 @@ extension DiaryDetailViewController {
     private func showActivityView() {
         let title = diaryInfo.title
         let body = diaryInfo.body
-        let activityViewController = CustomActivityViewController(activityItems: [title, body])
+        let activityViewController = UIActivityViewController(activityItems: [title, body])
         
         self.present(activityViewController, animated: true)
     }

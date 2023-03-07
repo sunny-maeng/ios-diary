@@ -8,106 +8,148 @@ import UIKit
 
 final class DiaryListViewController: UIViewController {
 
-    private var diaryListView: DiaryListView?
-    private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
+    private let viewModel: DiaryListViewModel = DiaryListViewModel() // ⭐️ DIC추후구현
 
-    private let weatherRepository: WeatherRepository = DefaultWeatherRepository()
+    private var diaryCollectionView: UICollectionView?
+    private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        diaryListView = DiaryListView()
-        self.view = diaryListView
+        view.backgroundColor = .systemBackground
         setupNavigationBar()
-        diaryListView?.diaryList?.delegate = self
-        diaryListView?.delegate = self
+        configureDiaryCollectionView()
+        configureLayout()
+        configureDiaryListDataSource()
+        bindViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        convertDiaryData()
-        configureDiaryListDataSource()
-        snapShot()
+        setUpViews()
+    }
+
+    private func bindViewModel() {
+        viewModel.diaries.bind { [weak self] diaries in
+            self?.snapShot(diaries: diaries)
+        }
     }
     
-    private func convertDiaryData() {
-//        CoreDataDiaryCRUDStorage().fetchDiaries { [weak self] result in
-//            switch result {
-//            case .success(let diaries):
-//                self?.diary = diaries
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+    private func setUpViews() {
+        viewModel.fetchDiaries()
+    }
+}
+
+// MARK: - ViewHierarchy & layout
+extension DiaryListViewController {
+
+    private func createDiaryCollectionViewLayout() -> UICollectionViewLayout {
+        var config = UICollectionLayoutListConfiguration(appearance: .plain)
+        config.trailingSwipeActionsConfigurationProvider = { indexPath in
+            return self.configureSwipeActions(indexPath: indexPath)
+        }
+
+        return UICollectionViewCompositionalLayout.list(using: config)
+    }
+
+    private func configureDiaryCollectionView() {
+        diaryCollectionView = UICollectionView(frame: .zero, collectionViewLayout: createDiaryCollectionViewLayout())
+        diaryCollectionView?.delegate = self
+    }
+
+    private func configureLayout() {
+        guard let diaryCollectionView = diaryCollectionView else { return }
+
+        self.view.addSubview(diaryCollectionView)
+        diaryCollectionView.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            diaryCollectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 20),
+            diaryCollectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            diaryCollectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            diaryCollectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+}
+
+// MARK: - collectionView DataSource
+extension DiaryListViewController {
+
+    private enum Section {
+        case main
     }
     
     private func configureDiaryListDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryInfo> {
-            cell, _, diaryInfo in
-            
-            cell.configureCell(title: diaryInfo.title,
-                               date: diaryInfo.createdDate,
-                               preview: diaryInfo.body)
-            
-            guard let diaryInfoWeather = diaryInfo.weather else {
-                return
-            }
-            
-            let cacheKey = NSString(string: diaryInfoWeather.icon)
-            if let cachedImage: UIImage = ImageCacheManager.shared.object(forKey: cacheKey) {
-                cell.configureWeatherIcon(weatherIcon: cachedImage)
-            } else {
-                self.weatherRepository.fetchWeatherIcon(iconName: diaryInfoWeather.icon) { result in
-                    switch result {
-                    case .success(let data):
-                        guard let weatherIcon = UIImage(data: data) else { return }
-                        cell.configureWeatherIcon(weatherIcon: weatherIcon)
-                        ImageCacheManager.shared.setObject(weatherIcon, forKey: cacheKey)
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-            }
+        let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryInfo> { cell, _, diaryInfo in
+            let cellViewModel = DiaryListCellViewModel(diaryInfo: diaryInfo)
+            cell.configureCell(with: cellViewModel)
         }
 
-        guard let diaryListView = diaryListView,
-            let diaryListView = diaryListView.diaryList else {
-            return
-        }
+        guard let diaryCollectionView = diaryCollectionView else { return }
         
-        dataSource = UICollectionViewDiffableDataSource(collectionView: diaryListView,
-                                                        cellProvider: {
+        dataSource = UICollectionViewDiffableDataSource(collectionView: diaryCollectionView) {
             collectionView, indexPath, itemIdentifier in
-            collectionView.dequeueConfiguredReusableCell(using: cellRegistration,
-                                                         for: indexPath,
-                                                         item: itemIdentifier)
-        })
+            collectionView.dequeueConfiguredReusableCell(using: cellRegistration, for: indexPath, item: itemIdentifier)
+        }
     }
     
-    private func snapShot() {
+    private func snapShot(diaries: [DiaryInfo]) {
         var snapshot = NSDiffableDataSourceSnapshot<Section, DiaryInfo>()
+        snapshot.deleteAllItems()
         snapshot.appendSections([.main])
-        snapshot.appendItems(diary)
+        snapshot.appendItems(diaries)
         dataSource?.apply(snapshot)
     }
 }
 
-extension DiaryListViewController {
-    
-    private enum Section {
-        case main
+// MARK: - UICollectionViewDelegate
+extension DiaryListViewController: UICollectionViewDelegate {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let diaryInfo = viewModel.diaryInIndex(indexPath.item)
+        let detailViewController = DiaryDetailViewController(diaryInfo: diaryInfo)
+
+        collectionView.deselectItem(at: indexPath, animated: false)
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
 }
 
+// MARK: - CellSwipeAction
+extension DiaryListViewController {
+
+    func configureSwipeActions(indexPath: IndexPath) -> UISwipeActionsConfiguration {
+        let deleteAction = UIContextualAction(style: .destructive,
+                                              title: viewModel.deleteActionTitle) { [weak self] _, _, _ in
+            self?.viewModel.deleteDiary(index: indexPath.item)
+        }
+
+        let shareAction = UIContextualAction(style: .normal,
+                                             title: viewModel.shareActionTitle) { [weak self] _, _, handler in
+            guard let self = self else { return }
+            let activityItems = self.viewModel.generateActivityItemsOfDiary(index: indexPath.item)
+            let activityViewController = UIActivityViewController(activityItems: activityItems)
+
+            self.present(activityViewController, animated: true)
+            handler(true)
+        }
+
+        shareAction.backgroundColor = .systemBlue
+        shareAction.image = UIImage(systemName: viewModel.shareImageSystemName)
+
+        return UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
+    }
+}
+
+// MARK: - NavigationBar
 extension DiaryListViewController {
     
     private func setupNavigationBar() {
-        self.navigationItem.title = Constant.navigationTitle
+        self.navigationItem.title = viewModel.navigationTitle
         
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = .systemBackground
         navigationController?.navigationBar.standardAppearance = appearance
         navigationController?.navigationBar.scrollEdgeAppearance = appearance
         
-        let addBarButtonItem = UIBarButtonItem(title: Constant.barButtonTitle,
+        let addBarButtonItem = UIBarButtonItem(title: viewModel.barButtonTitle,
                                                style: .plain,
                                                target: self,
                                                action: #selector(registerDiary))
@@ -116,77 +158,9 @@ extension DiaryListViewController {
     }
     
     @objc private func registerDiary() {
-        weatherRepository.fetchWeatherInfo { (result: Result<WeatherInfo, Error>) in
-            switch result {
-            case .success(let weatherInfo):
-                let registerDiaryViewController = RegisterDiaryViewController(
-                                    diaryInfo: DiaryInfo(title: Constant.empty,
-                                                         body: Constant.empty,
-                                                         createdAt: Date(),
-                                                         weather: weatherInfo))
-
-                self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
-            case .failure(let error):
-                print(error)
-            }
+        viewModel.generateNewDiary { newDiary in
+            let registerDiaryViewController = RegisterDiaryViewController(diaryInfo: newDiary)
+            self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
         }
-    }
-}
-
-extension DiaryListViewController: UICollectionViewDelegate {
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailViewController = DiaryDetailViewController(diaryInfo: diary[indexPath.item])
-        
-        collectionView.deselectItem(at: indexPath, animated: false)
-        self.navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
-extension DiaryListViewController: DiaryListViewDelegate {
-    
-    func configureSwipeActions(indexPath: IndexPath) -> UISwipeActionsConfiguration {
-        let deleteAction = UIContextualAction(style: .destructive,
-                                              title: Constant.deleteActionTitle) {
-            _, _, handler in
-            CoreDataDiaryCRUDStorage().delete(self.diary[indexPath.item])
-            guard let dataSource = self.dataSource,
-                  let id = dataSource.itemIdentifier(for: indexPath) else {
-                return
-            }
-            
-            var currentData = dataSource.snapshot()
-            currentData.deleteItems([id])
-            dataSource.apply(currentData)
-            handler(true)
-        }
-        
-        let shareAction = UIContextualAction(style: .normal,
-                                             title: Constant.shareActionTitle) {
-            _, _, handler in
-            let title = self.diary[indexPath.item].title
-            let body = self.diary[indexPath.item].body
-            let activityViewController = CustomActivityViewController(activityItems: [title, body])
-        
-            self.present(activityViewController, animated: true)
-            handler(true)
-        }
-        
-        shareAction.backgroundColor = .systemBlue
-        shareAction.image = UIImage(systemName: Constant.shareIcon)
-        
-        return UISwipeActionsConfiguration(actions: [deleteAction, shareAction])
-    }
-}
-
-extension DiaryListViewController {
-    
-    private enum Constant {
-        static let navigationTitle = "일기장"
-        static let barButtonTitle = "+"
-        static let deleteActionTitle = "delete"
-        static let shareActionTitle = "share"
-        static let shareIcon = "square.and.arrow.up"
-        static let empty = ""
     }
 }

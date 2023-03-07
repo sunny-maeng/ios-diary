@@ -49,7 +49,8 @@ class RegisterDiaryViewController: UIViewController {
     }
     
     func setupNavigationBar() {
-        self.navigationItem.title = diaryInfo.createdDate
+        self.navigationItem.title = ""
+        //사라져서 잠시self.navigationItem.title = diaryInfo.createdDate
     }
 }
 

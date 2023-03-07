@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CustomActivityViewController: UIActivityViewController {
+extension UIActivityViewController {
 
     convenience init(activityItems: [String]) {
         self.init(activityItems: activityItems, applicationActivities: nil)

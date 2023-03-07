@@ -11,7 +11,7 @@ final class DefaultFetchDiariesUseCase: SaveDiaryUseCase {
 
     private let diariesRepository: DiariesRepository
 
-    init(diariesRepository: DiariesRepository) {
+    init(diariesRepository: DiariesRepository = DefaultDiariesRepository()) {
         self.diariesRepository = diariesRepository
     }
 
