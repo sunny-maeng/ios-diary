@@ -67,25 +67,6 @@ extension DiaryCell {
     }
 }
 
-/*
-⭐️캐싱
- let cacheKey = NSString(string: diaryInfoWeather.icon)
- if let cachedImage: UIImage = ImageCacheManager.shared.object(forKey: cacheKey) {
-     cell.configureWeatherIcon(weatherIcon: cachedImage)
- } else {
-     self.weatherRepository.fetchWeatherIcon(iconName: diaryInfoWeather.icon) { result in
-         switch result {
-         case .success(let data):
-             guard let weatherIcon = UIImage(data: data) else { return }
-             cell.configureWeatherIcon(weatherIcon: weatherIcon)
-             ImageCacheManager.shared.setObject(weatherIcon, forKey: cacheKey)
-         case .failure(let error):
-             print(error)
-         }
-     }
- }
-*/
-
 // MARK: - Layout & Accessories
 extension DiaryCell {
 

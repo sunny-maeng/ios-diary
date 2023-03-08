@@ -10,15 +10,18 @@ import Foundation
 final class DefaultWeatherRepository {
 
     private let weatherAPI: WeatherAPI
+    private let weatherIconCache: CacheStorage
 
     init(weatherAPI: WeatherAPI = DefaultWeatherAPI(locationManager: DefaultLocationManager(),
-                                                    networkService: DefaultNetworkService())) {
+                                                    networkService: DefaultNetworkService()),
+         weatherIconCache: CacheStorage = WeatherIconCache()) {
         self.weatherAPI = weatherAPI
+        self.weatherIconCache = weatherIconCache
     }
 }
 
 extension DefaultWeatherRepository: WeatherRepository {
-
+    
     func fetchWeatherInfo(completion: @escaping (Result<WeatherInfo, Error>) -> Void) {
         weatherAPI.fetchWeatherInfoDto { (result: Result<WeatherResponseDTO, NetworkError>)  in
             switch result {
@@ -31,11 +34,26 @@ extension DefaultWeatherRepository: WeatherRepository {
             }
         }
     }
-
+    
     func fetchWeatherIcon(iconName: String, completion: @escaping (Result<Data, Error>) -> Void) {
-        weatherAPI.fetchWeatherIconData(iconName: iconName) { (result: Result<Data, NetworkError>)  in
-            let result = result.mapError { $0 as Error }
-            DispatchQueue.main.async { completion(result) }
+        weatherAPI.fetchWeatherIconData(iconName: iconName) { [weak self] (result: Result<Data, NetworkError>)  in
+            let cacheKey: NSString = NSString(string: iconName)
+            
+            if let cachedIcon: NSData = self?.weatherIconCache.cacheIcon(cacheKey: cacheKey) {
+                DispatchQueue.main.async {
+                    completion(.success(Data(cachedIcon)))
+                }
+            } else {
+                switch result {
+                case .success(let iconData):
+                    self?.weatherIconCache.store(cacheKey: NSString(string: iconName), icon: NSData(data: iconData))
+                    DispatchQueue.main.async {
+                        completion(.success(iconData))
+                    }
+                case .failure(let networkError):
+                    completion(.failure(networkError as Error))
+                }
+            }
         }
     }
 }
