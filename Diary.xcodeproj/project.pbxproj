@@ -63,7 +63,7 @@
 
 /* Begin PBXFileReference section */
 		1114409FF5A6310C3267558B /* Pods-Diary.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Diary.release.xcconfig"; path = "Target Support Files/Pods-Diary/Pods-Diary.release.xcconfig"; sourceTree = "<group>"; };
-		411D3C3A29B393C10063F14B /* WeatherInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = WeatherInfo.plist; sourceTree = "<group>"; };
+		411D3C3A29B393C10063F14B /* WeatherInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = WeatherInfo.plist; path = Diary/Resource/WeatherInfo.plist; sourceTree = SOURCE_ROOT; };
 		411D3C3C29B394230063F14B /* Diary++Bundle+apiKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Diary++Bundle+apiKey.swift"; sourceTree = "<group>"; };
 		411D3C3E29B3A01C0063F14B /* WeatherResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeatherResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		411D3C4129B485610063F14B /* DefaultDiariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDiariesRepository.swift; sourceTree = "<group>"; };
@@ -117,7 +117,7 @@
 		C739AE2E284DF28600741E8F /* Diary.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Diary.xcdatamodel; sourceTree = "<group>"; };
 		C739AE30284DF28600741E8F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C739AE33284DF28600741E8F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		C739AE35284DF28600741E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C739AE35284DF28600741E8F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Diary/Resource/Info.plist; sourceTree = SOURCE_ROOT; };
 		FE65955D4EE889636C048E48 /* Pods_Diary.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Diary.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -328,6 +328,26 @@
 			path = Cache;
 			sourceTree = "<group>";
 		};
+		4175DF3A29B85D990077C425 /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				C739AE24284DF28600741E8F /* AppDelegate.swift */,
+				C739AE26284DF28600741E8F /* SceneDelegate.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		4175DF3B29B85DE90077C425 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				C739AE30284DF28600741E8F /* Assets.xcassets */,
+				C739AE32284DF28600741E8F /* LaunchScreen.storyboard */,
+				C739AE35284DF28600741E8F /* Info.plist */,
+				411D3C3A29B393C10063F14B /* WeatherInfo.plist */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		41A52ED329B3730100D970FF /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -431,6 +451,7 @@
 			isa = PBXGroup;
 			children = (
 				41C61BF529B35BE0009E7040 /* CoreDataStorage.swift */,
+				C739AE2D284DF28600741E8F /* Diary.xcdatamodeld */,
 			);
 			path = CoreDataStorage;
 			sourceTree = "<group>";
@@ -492,17 +513,12 @@
 		C739AE23284DF28600741E8F /* Diary */ = {
 			isa = PBXGroup;
 			children = (
-				C739AE24284DF28600741E8F /* AppDelegate.swift */,
-				C739AE26284DF28600741E8F /* SceneDelegate.swift */,
+				4175DF3A29B85D990077C425 /* Application */,
 				4162BF6129B716F000EC9FC0 /* Presentation */,
 				41C61BC929B34D45009E7040 /* Domain */,
 				41C61BF229B35BA6009E7040 /* Data */,
 				41A52ED729B37EF200D970FF /* Infrastructure */,
-				C739AE30284DF28600741E8F /* Assets.xcassets */,
-				C739AE32284DF28600741E8F /* LaunchScreen.storyboard */,
-				C739AE35284DF28600741E8F /* Info.plist */,
-				411D3C3A29B393C10063F14B /* WeatherInfo.plist */,
-				C739AE2D284DF28600741E8F /* Diary.xcdatamodeld */,
+				4175DF3B29B85DE90077C425 /* Resource */,
 			);
 			path = Diary;
 			sourceTree = "<group>";
@@ -814,7 +830,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Diary/Info.plist;
+				INFOPLIST_FILE = Diary/Resource/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치정보를 받아오려고 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
@@ -846,7 +862,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = G9W4Z8U9JB;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Diary/Info.plist;
+				INFOPLIST_FILE = Diary/Resource/Info.plist;
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "사용자의 위치정보를 받아오려고 합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
