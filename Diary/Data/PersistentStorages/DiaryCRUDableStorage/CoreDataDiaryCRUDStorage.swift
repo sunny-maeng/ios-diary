@@ -25,14 +25,12 @@ extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
     func save(_ diaryInfo: DiaryInfo) {
         guard searchDiary(using: diaryInfo.id).first == nil else { return }
 
-        _ = dataMapping.domainToCoreDataDairyEntity(from: diaryInfo,
-                                                                  coreStorageContext: coreDataStorage.context)
+        _ = dataMapping.domainToCoreDataDairyEntity(from: diaryInfo, coreStorageContext: coreDataStorage.context)
         coreDataStorage.saveContext()
     }
 
     func fetchDiaries(completion: @escaping(Result<[DiaryInfo], Error>) -> Void) {
         deleteAllNoDataDiaries()
-
         var diaryList: [DiaryInfo] = []
         let request = Diary.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(key: Constant.createdAt, ascending: false)]
@@ -50,9 +48,7 @@ extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
     }
 
     func update(_ diaryInfo: DiaryInfo) {
-        guard let fetchedData = searchDiary(using: diaryInfo.id).first else {
-            return
-        }
+        guard let fetchedData = searchDiary(using: diaryInfo.id).first else { return }
 
         fetchedData.title = diaryInfo.title
         fetchedData.body = diaryInfo.body
@@ -61,9 +57,7 @@ extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
     }
 
     func delete(_ diaryInfo: DiaryInfo) {
-        guard let diaryWillDelete = searchDiary(using: diaryInfo.id).first else {
-            return
-        }
+        guard let diaryWillDelete = searchDiary(using: diaryInfo.id).first else { return }
 
         coreDataStorage.context.delete(diaryWillDelete)
         coreDataStorage.saveContext()
@@ -73,8 +67,7 @@ extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
         let request: NSFetchRequest<Diary> = NSFetchRequest(entityName: Constant.diaryContainer)
         let predicateOfTitle = NSPredicate(format: Constant.titleChecking, Constant.empty)
         let predicateOfBody = NSPredicate(format: Constant.bodyChecking, Constant.empty)
-        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateOfTitle,
-                                                                                predicateOfBody])
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [predicateOfTitle, predicateOfBody])
 
         do {
             let noDataDiaries = try coreDataStorage.context.fetch(request)

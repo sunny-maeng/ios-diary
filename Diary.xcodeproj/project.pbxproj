@@ -356,13 +356,6 @@
 			path = Infrastructure;
 			sourceTree = "<group>";
 		};
-		41AF40FF2952DD1400AC33CE /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		41C61BC929B34D45009E7040 /* Domain */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,13 +470,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		905456F02952CC2700AAFEB0 /* View */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = View;
-			sourceTree = "<group>";
-		};
 		C739AE18284DF28600741E8F = {
 			isa = PBXGroup;
 			children = (
@@ -512,8 +498,6 @@
 				41C61BC929B34D45009E7040 /* Domain */,
 				41C61BF229B35BA6009E7040 /* Data */,
 				41A52ED729B37EF200D970FF /* Infrastructure */,
-				905456F02952CC2700AAFEB0 /* View */,
-				41AF40FF2952DD1400AC33CE /* ViewController */,
 				C739AE30284DF28600741E8F /* Assets.xcassets */,
 				C739AE32284DF28600741E8F /* LaunchScreen.storyboard */,
 				C739AE35284DF28600741E8F /* Info.plist */,

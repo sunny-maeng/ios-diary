@@ -24,7 +24,6 @@ final class DefaultLocationManager: NSObject {
         locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers
         locationManager.delegate = self
     }
-
 }
 
 extension DefaultLocationManager: LocationManager {

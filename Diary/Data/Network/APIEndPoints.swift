@@ -29,5 +29,4 @@ struct APIEndpoints {
 
         return EndPoint(config: apiDataNetworkConfig)
     }
-
 }

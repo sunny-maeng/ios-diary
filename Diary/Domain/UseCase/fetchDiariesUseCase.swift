@@ -20,5 +20,4 @@ final class DefaultFetchDiaryUseCase: FetchDiariesUseCase {
             completion(result)
         }
     }
-
 }

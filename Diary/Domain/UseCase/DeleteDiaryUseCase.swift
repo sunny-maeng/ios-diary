@@ -18,5 +18,4 @@ final class DefaultDeleteDiariesUseCase: DeleteDiaryUseCase {
     func delete(diaryInfo: DiaryInfo) {
         diariesRepository.delete(diaryInfo: diaryInfo)
     }
-
 }

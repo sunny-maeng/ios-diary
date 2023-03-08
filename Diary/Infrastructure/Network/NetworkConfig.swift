@@ -12,7 +12,6 @@ protocol NetworkConfigurable {
     var baseURL: String { get }
     var path: [String]? { get }
     var queryItems: [(name: String, value: String)]? { get }
-
 }
 
 struct ApiDataNetworkConfig: NetworkConfigurable {
@@ -28,5 +27,4 @@ struct ApiDataNetworkConfig: NetworkConfigurable {
         self.path = path
         self.queryItems = queryItems
     }
-    
 }

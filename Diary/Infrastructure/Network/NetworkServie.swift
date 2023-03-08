@@ -12,7 +12,6 @@ protocol NetworkService {
     typealias CompletionHandler = (Result<Data, NetworkError>) -> Void
 
     func request(endpoint: EndPoint, completion: @escaping CompletionHandler)
-
 }
 
 final class DefaultNetworkService: NetworkService {
@@ -45,7 +44,6 @@ final class DefaultNetworkService: NetworkService {
             completion(.success(data))
         }.resume()
     }
-
 }
 
 extension DefaultNetworkService {
@@ -60,7 +58,6 @@ extension DefaultNetworkService {
             completion(.failure(.requestFailError))
         }
     }
-
 }
 
 enum NetworkError: Error {
@@ -69,5 +66,4 @@ enum NetworkError: Error {
     case httpResponseError(code: Int)
     case noDataError
     case generateUrlFailError
-
 }

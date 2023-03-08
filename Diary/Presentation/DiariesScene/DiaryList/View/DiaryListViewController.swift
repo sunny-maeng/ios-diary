@@ -8,10 +8,18 @@ import UIKit
 
 final class DiaryListViewController: UIViewController {
 
-    private let viewModel: DiaryListViewModel = DiaryListViewModel() // ⭐️ DIC추후구현
-
+    private let viewModel: DiaryListViewModel
     private var diaryCollectionView: UICollectionView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
+
+    init(viewModel: DiaryListViewModel = DiaryListViewModel()) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -105,8 +113,8 @@ extension DiaryListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let diaryInfo = viewModel.diaryInIndex(indexPath.item)
-        let diaryModifyingViewController = DiaryModifyingViewController(
-            viewModel: DiaryModifyingViewModel(diaryInfo: diaryInfo))
+        let diaryModifyingViewModel =  DiaryModifyingViewModel(diaryInfo: diaryInfo)
+        let diaryModifyingViewController = DiaryModifyingViewController(viewModel: diaryModifyingViewModel)
 
         collectionView.deselectItem(at: indexPath, animated: false)
         self.navigationController?.pushViewController(diaryModifyingViewController, animated: true)
@@ -160,8 +168,8 @@ extension DiaryListViewController {
     
     @objc private func registerDiary() {
         viewModel.generateNewDiary { newDiary in
-            let registerDiaryViewController = DiaryRegistrationViewController(
-                viewModel: DiaryRegistrationViewModel(diaryInfo: newDiary))
+            let diaryRegistrationViewModel = DiaryRegistrationViewModel(diaryInfo: newDiary)
+            let registerDiaryViewController = DiaryRegistrationViewController(viewModel: diaryRegistrationViewModel)
             self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
         }
     }

@@ -44,5 +44,4 @@ final class EndPoint {
 
         return url
     }
-    
 }

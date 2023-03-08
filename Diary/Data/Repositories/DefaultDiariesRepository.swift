@@ -14,7 +14,6 @@ final class DefaultDiariesRepository {
     init(diaryCRUDStorage: DiaryCRUDStorage = CoreDataDiaryCRUDStorage() ) {
         self.diaryCRUDStorage = diaryCRUDStorage
     }
-
 }
 
 extension DefaultDiariesRepository: DiariesRepository {
@@ -36,5 +35,4 @@ extension DefaultDiariesRepository: DiariesRepository {
     func delete(diaryInfo: DiaryInfo) {
         diaryCRUDStorage.delete(diaryInfo)
     }
-
 }

@@ -18,5 +18,4 @@ final class DefaultUpdateDiaryUseCase: UpdateDiaryUseCase {
     func update(diaryInfo: DiaryInfo) {
         diariesRepository.update(diaryInfo: diaryInfo)
     }
-
 }

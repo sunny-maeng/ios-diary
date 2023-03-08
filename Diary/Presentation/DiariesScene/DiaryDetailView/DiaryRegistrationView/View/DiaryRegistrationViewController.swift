@@ -13,6 +13,7 @@ class DiaryRegistrationViewController: UIViewController {
 
     let titleTextView = UITextView(font: .title1)
     let bodyTextView = UITextView(font: .body)
+
     private let titlePlaceHolder = UILabel(textColor: .systemGray2, font: .title1)
     private let bodyPlaceHolder = UILabel(textColor: .systemGray2, font: .body)
 

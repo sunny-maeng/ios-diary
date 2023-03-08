@@ -26,14 +26,3 @@ extension DiaryListCellViewModel {
         self.id = diaryInfo.id
     }
 }
-
-//    func configureCell(title: String, date: String, preview: String) {
-//        configureDiaryCellLayout()
-//        titleLabel.text = title
-//        dateLabel.text = date
-//        previewLabel.text = preview
-//    }
-//
-//    func configureWeatherIcon(weatherIcon: UIImage) {
-//        weatherIconView.image = weatherIcon
-//    }

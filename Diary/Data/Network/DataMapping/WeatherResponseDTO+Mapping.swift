@@ -24,7 +24,6 @@ struct WeatherResponseDTO: Decodable {
         main = try nestedContainer.decode(String.self, forKey: .main)
         icon = try nestedContainer.decode(String.self, forKey: .icon)
     }
-
 }
 
 extension WeatherResponseDTO {
@@ -32,5 +31,4 @@ extension WeatherResponseDTO {
     func toDomain() -> WeatherInfo {
         return .init(main: self.main, icon: self.icon)
     }
-
 }

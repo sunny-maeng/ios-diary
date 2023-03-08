@@ -16,5 +16,4 @@ final class Location {
         self.latitude = latitude
         self.longitude = longitude
     }
-    
 }

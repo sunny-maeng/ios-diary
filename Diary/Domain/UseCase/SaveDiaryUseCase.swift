@@ -18,5 +18,4 @@ final class DefaultFetchDiariesUseCase: SaveDiaryUseCase {
     func save(diaryInfo: DiaryInfo) {
         diariesRepository.save(diaryInfo: diaryInfo)
     }
-
 }

@@ -41,5 +41,4 @@ struct DataMapping {
 
         return .init(main: main, icon: icon)
     }
-
 }

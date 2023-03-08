@@ -13,5 +13,4 @@ protocol DiariesRepository {
     func save(diaryInfo: DiaryInfo)
     func update(diaryInfo: DiaryInfo)
     func delete(diaryInfo: DiaryInfo)
-    
 }

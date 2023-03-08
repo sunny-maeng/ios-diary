@@ -17,18 +17,16 @@ final class CoreDataStorage {
     private let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: Constant.diaryContainer)
 
-        container.loadPersistentStores(completionHandler: { (_, error) in
+        container.loadPersistentStores { (_, error) in
             if let error = error as NSError? {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
-        })
+        }
 
         return container
     }()
 
-    var context: NSManagedObjectContext {
-        return persistentContainer.viewContext
-    }
+    var context: NSManagedObjectContext { return persistentContainer.viewContext }
 
     func saveContext() {
         do {
@@ -37,7 +35,6 @@ final class CoreDataStorage {
             print(error.localizedDescription)
         }
     }
-
 }
 
 extension CoreDataStorage {
@@ -45,5 +42,4 @@ extension CoreDataStorage {
     private enum Constant {
         static let diaryContainer = "Diary"
     }
-    
 }

@@ -14,5 +14,4 @@ protocol DiaryCRUDStorage {
     func update(_ diaryInfo: DiaryInfo)
     func delete(_ diaryInfo: DiaryInfo)
     func deleteAllNoDataDiaries()
-    
 }

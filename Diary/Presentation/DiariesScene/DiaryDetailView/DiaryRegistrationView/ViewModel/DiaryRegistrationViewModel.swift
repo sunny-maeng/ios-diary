@@ -14,6 +14,7 @@ struct DiaryRegistrationViewModel {
             updateDiaryUseCase.update(diaryInfo: diaryInfo)
         }
     }
+    
     var navigationTitle: String { return diaryInfo.createdAt.localizedDateFormat }
     let titlePlaceHolder: String = "일기 제목"
     let bodyPlaceHolder: String = "일기 내용"
