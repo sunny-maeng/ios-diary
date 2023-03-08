@@ -6,7 +6,7 @@
 
 import UIKit
 
-final class DiaryListViewController: UIViewController {
+final class DiaryListViewController: UIViewController, Alertable {
 
     private let viewModel: DiaryListViewModel
     private var diaryCollectionView: UICollectionView?
@@ -39,10 +39,18 @@ final class DiaryListViewController: UIViewController {
         viewModel.diaries.bind { [weak self] diaries in
             self?.snapShot(diaries: diaries)
         }
+
+        viewModel.error.bind { [weak self] error in
+            self?.showError(error)
+        }
     }
-    
+
     private func setUpViews() {
         viewModel.fetchDiaries()
+    }
+
+    private func showError(_ error: String) {
+        showAlert(title: viewModel.errorTitle, message: error)
     }
 }
 

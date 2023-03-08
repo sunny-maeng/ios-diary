@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct DiaryListViewModel {
+final class DiaryListViewModel {
 
-    var diaries: Observable<[DiaryInfo]>
+    var diaries: Observable<[DiaryInfo]> = Observable([])
+    var error: Observable<String> = Observable("")
+    let errorTitle = "Error"
     let navigationTitle = "일기장"
     let deleteActionTitle = "delete"
     let shareActionTitle = "share"
@@ -20,23 +22,21 @@ struct DiaryListViewModel {
     private let deleteDiaryUseCase: DeleteDiaryUseCase
     private let fetchWeatherUseCase: FetchWeatherUseCase
 
-    init(diaries: Observable<[DiaryInfo]> = Observable([]),
-         fetchDiariesUseCase: FetchDiariesUseCase = DefaultFetchDiaryUseCase(),
+    init(fetchDiariesUseCase: FetchDiariesUseCase = DefaultFetchDiaryUseCase(),
          deleteDiaryUseCase: DeleteDiaryUseCase = DefaultDeleteDiariesUseCase(),
          fetchWeatherUseCase: FetchWeatherUseCase = DefaultFetchWeatherUseCase()) {
-        self.diaries = diaries
         self.fetchDiariesUseCase = fetchDiariesUseCase
         self.deleteDiaryUseCase = deleteDiaryUseCase
         self.fetchWeatherUseCase = fetchWeatherUseCase
     }
 
     func fetchDiaries() {
-        fetchDiariesUseCase.fetch { result in
+        fetchDiariesUseCase.fetch { [weak self] result in
             switch result {
             case .success(let fetchedDiaries):
-                diaries.value = fetchedDiaries
+                self?.diaries.value = fetchedDiaries
             case .failure(let error):
-                print(error)
+                self?.error.value = "Failed loading diaries"
             }
         }
     }
