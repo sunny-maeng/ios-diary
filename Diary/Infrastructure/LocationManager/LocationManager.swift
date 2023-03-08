@@ -11,10 +11,9 @@ import CoreLocation
 protocol LocationManager {
 
     func fetchLocation() -> Location
-
 }
 
-final class DefaultLocationManager: NSObject  {
+final class DefaultLocationManager: NSObject {
 
     private var locationManager: CLLocationManager
     private var currentLocation: Location = Location(latitude: 0, longitude: 0)

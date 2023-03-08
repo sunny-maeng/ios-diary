@@ -25,8 +25,8 @@ extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
     func save(_ diaryInfo: DiaryInfo) {
         guard searchDiary(using: diaryInfo.id).first == nil else { return }
 
-        let diaryEntity = dataMapping.domainToCoreDataDairyEntity(from: diaryInfo,
-                                                             coreStorageContext: coreDataStorage.context)
+        _ = dataMapping.domainToCoreDataDairyEntity(from: diaryInfo,
+                                                                  coreStorageContext: coreDataStorage.context)
         coreDataStorage.saveContext()
     }
 
@@ -111,7 +111,6 @@ extension CoreDataDiaryCRUDStorage: DiaryCRUDStorage {
 
         return []
     }
-
 }
 
 extension CoreDataDiaryCRUDStorage {
@@ -124,5 +123,4 @@ extension CoreDataDiaryCRUDStorage {
         static let createdAt = "createdAt"
         static let empty = ""
     }
-
 }

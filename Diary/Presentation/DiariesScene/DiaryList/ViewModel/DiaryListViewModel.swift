@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DiaryListViewModel {
+struct DiaryListViewModel {
 
     var diaries: Observable<[DiaryInfo]>
     let navigationTitle = "일기장"
@@ -31,10 +31,10 @@ final class DiaryListViewModel {
     }
 
     func fetchDiaries() {
-        fetchDiariesUseCase.fetch { [weak self] result in
+        fetchDiariesUseCase.fetch { result in
             switch result {
             case .success(let fetchedDiaries):
-                self?.diaries.value = fetchedDiaries
+                diaries.value = fetchedDiaries
             case .failure(let error):
                 print(error)
             }
@@ -51,7 +51,7 @@ final class DiaryListViewModel {
     }
 
     func generateNewDiary(handler: @escaping (DiaryInfo) -> Void) {
-        var diary = DiaryInfo(title: Constant.empty, body: Constant.empty, createdAt: Date(), weather: nil)
+        var diary = DiaryInfo(title: Constant.empty, body: Constant.empty, createdAt: Date(), weather: nil, id: UUID())
 
         fetchWeatherUseCase.fetchWeather { result in
             switch result {

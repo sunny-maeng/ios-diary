@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultUpdateDiariesUseCase: UpdateDiaryUseCase {
+final class DefaultUpdateDiaryUseCase: UpdateDiaryUseCase {
 
     private let diariesRepository: DiariesRepository
 

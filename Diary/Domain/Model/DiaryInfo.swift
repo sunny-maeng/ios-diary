@@ -13,5 +13,5 @@ struct DiaryInfo: Hashable {
     var body: String
     let createdAt: Date
     var weather: WeatherInfo?
-    var id = UUID()
+    var id: UUID
 }

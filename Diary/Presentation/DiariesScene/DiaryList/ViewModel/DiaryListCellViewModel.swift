@@ -37,4 +37,3 @@ extension DiaryListCellViewModel {
 //    func configureWeatherIcon(weatherIcon: UIImage) {
 //        weatherIconView.image = weatherIcon
 //    }
-

@@ -105,10 +105,11 @@ extension DiaryListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let diaryInfo = viewModel.diaryInIndex(indexPath.item)
-        let detailViewController = DiaryDetailViewController(diaryInfo: diaryInfo)
+        let diaryModifyingViewController = DiaryModifyingViewController(
+            viewModel: DiaryModifyingViewModel(diaryInfo: diaryInfo))
 
         collectionView.deselectItem(at: indexPath, animated: false)
-        self.navigationController?.pushViewController(detailViewController, animated: true)
+        self.navigationController?.pushViewController(diaryModifyingViewController, animated: true)
     }
 }
 
@@ -159,7 +160,8 @@ extension DiaryListViewController {
     
     @objc private func registerDiary() {
         viewModel.generateNewDiary { newDiary in
-            let registerDiaryViewController = RegisterDiaryViewController(diaryInfo: newDiary)
+            let registerDiaryViewController = DiaryRegistrationViewController(
+                viewModel: DiaryRegistrationViewModel(diaryInfo: newDiary))
             self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
         }
     }
