@@ -1,6 +1,8 @@
 # README
 # 📒 Diary 
 
+## 리팩토링 진행 중 - branch refactor_cleanArch+MVVM
+
 CoreData를 이용해 기록을 남기는 일기장 어플입니다.
 
 - 새로운 일기를 저장할 수 있습니다. 
