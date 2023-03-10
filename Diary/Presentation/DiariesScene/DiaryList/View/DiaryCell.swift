@@ -26,6 +26,7 @@ final class DiaryCell: UICollectionViewListCell {
         let stackView = UIStackView()
         stackView.spacing = 5
         stackView.axis = .horizontal
+        stackView.alignment = .center
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
@@ -33,10 +34,9 @@ final class DiaryCell: UICollectionViewListCell {
     
     private let totalStackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.spacing = 5
+        stackView.spacing = 10
         stackView.axis = .vertical
         stackView.alignment = .leading
-        stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         return stackView
