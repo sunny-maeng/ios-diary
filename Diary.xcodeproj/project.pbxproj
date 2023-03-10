@@ -32,6 +32,7 @@
 		4175DF3229B8466A0077C425 /* CacheStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4175DF3129B8466A0077C425 /* CacheStorage.swift */; };
 		4175DF3529B8494A0077C425 /* WeatherIconCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4175DF3429B8494A0077C425 /* WeatherIconCache.swift */; };
 		4175DF3D29B863070077C425 /* Alertable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4175DF3C29B863070077C425 /* Alertable.swift */; };
+		417E1C5829BB7D3B00EB09EA /* Usecases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417E1C5729BB7D3B00EB09EA /* Usecases.swift */; };
 		4181DFD029B37F9100A3AB26 /* NetworkServie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181DFCF29B37F9100A3AB26 /* NetworkServie.swift */; };
 		4181DFD229B37F9B00A3AB26 /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181DFD129B37F9B00A3AB26 /* EndPoint.swift */; };
 		4181DFD429B381DF00A3AB26 /* NetworkConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4181DFD329B381DF00A3AB26 /* NetworkConfig.swift */; };
@@ -43,7 +44,6 @@
 		41C61BCE29B34D85009E7040 /* WeatherInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BCD29B34D85009E7040 /* WeatherInfo.swift */; };
 		41C61BD529B34E53009E7040 /* FetchDiariesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */; };
 		41C61BD829B34F09009E7040 /* DiariesRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BD729B34F09009E7040 /* DiariesRepository.swift */; };
-		41C61BDB29B35168009E7040 /* UseCases.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BDA29B35168009E7040 /* UseCases.swift */; };
 		41C61BDD29B35189009E7040 /* SaveDiaryUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BDC29B35189009E7040 /* SaveDiaryUseCase.swift */; };
 		41C61BF629B35BE0009E7040 /* CoreDataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BF529B35BE0009E7040 /* CoreDataStorage.swift */; };
 		41C61BF929B35F83009E7040 /* DiaryCRUDStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C61BF829B35F83009E7040 /* DiaryCRUDStorage.swift */; };
@@ -88,6 +88,7 @@
 		4175DF3129B8466A0077C425 /* CacheStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheStorage.swift; sourceTree = "<group>"; };
 		4175DF3429B8494A0077C425 /* WeatherIconCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherIconCache.swift; sourceTree = "<group>"; };
 		4175DF3C29B863070077C425 /* Alertable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alertable.swift; sourceTree = "<group>"; };
+		417E1C5729BB7D3B00EB09EA /* Usecases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Usecases.swift; sourceTree = "<group>"; };
 		4181DFCF29B37F9100A3AB26 /* NetworkServie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServie.swift; sourceTree = "<group>"; };
 		4181DFD129B37F9B00A3AB26 /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
 		4181DFD329B381DF00A3AB26 /* NetworkConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkConfig.swift; sourceTree = "<group>"; };
@@ -100,7 +101,6 @@
 		41C61BCD29B34D85009E7040 /* WeatherInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherInfo.swift; sourceTree = "<group>"; };
 		41C61BD429B34E53009E7040 /* FetchDiariesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchDiariesUseCase.swift; sourceTree = "<group>"; };
 		41C61BD729B34F09009E7040 /* DiariesRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiariesRepository.swift; sourceTree = "<group>"; };
-		41C61BDA29B35168009E7040 /* UseCases.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UseCases.swift; path = "../../../../../../../../Library/Mobile Documents/com~apple~CloudDocs/.Trash/ios-diary 오후 7.11.41/Diary/Domain/Interfaces/UseCases.swift"; sourceTree = "<group>"; };
 		41C61BDC29B35189009E7040 /* SaveDiaryUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveDiaryUseCase.swift; sourceTree = "<group>"; };
 		41C61BF529B35BE0009E7040 /* CoreDataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStorage.swift; sourceTree = "<group>"; };
 		41C61BF829B35F83009E7040 /* DiaryCRUDStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryCRUDStorage.swift; sourceTree = "<group>"; };
@@ -424,7 +424,7 @@
 		41C61BD929B35153009E7040 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
-				41C61BDA29B35168009E7040 /* UseCases.swift */,
+				417E1C5729BB7D3B00EB09EA /* Usecases.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -642,7 +642,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41C61BDB29B35168009E7040 /* UseCases.swift in Sources */,
 				C739AE29284DF28600741E8F /* DiaryListViewController.swift in Sources */,
 				41C61BCE29B34D85009E7040 /* WeatherInfo.swift in Sources */,
 				411D3C5829B4C12F0063F14B /* MappintModelV1ToV2.xcmappingmodel in Sources */,
@@ -659,6 +658,7 @@
 				C739AE27284DF28600741E8F /* SceneDelegate.swift in Sources */,
 				4162BF7529B72B4B00EC9FC0 /* DiaryListCellViewModel.swift in Sources */,
 				4162BF7B29B7426700EC9FC0 /* Date+localizedDateFormat.swift in Sources */,
+				417E1C5829BB7D3B00EB09EA /* Usecases.swift in Sources */,
 				41BE025329533C9E006053FD /* DiaryRegistrationViewController.swift in Sources */,
 				90DC5C8C2951A6E1003D6684 /* UITextView+ConvenienceInit.swift in Sources */,
 				41A52ED229B371FE00D970FF /* DataMapping.swift in Sources */,
