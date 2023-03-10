@@ -1,8 +1,6 @@
 # README
 # 📒 Diary 
 
-## 리팩토링 진행 중 - branch refactor_cleanArch+MVVM
-
 CoreData를 이용해 기록을 남기는 일기장 어플입니다.
 
 - 새로운 일기를 저장할 수 있습니다. 
@@ -36,6 +34,7 @@ CoreData를 이용해 기록을 남기는 일기장 어플입니다.
  |[써니쿠키](https://github.com/sunny-maeng)|[LJ](https://github.com/lj-7-77)|
  |:---:|:---:|
 |<img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src="https://avatars.githubusercontent.com/u/107384230?v=4">| <img width="180px" img style="border: 2px solid lightgray; border-radius: 90px;-moz-border-radius: 90px;-khtml-border-radius: 90px;-webkit-border-radius: 90px;" src="https://i.imgur.com/ggU7PLR.jpg">|
+ | 개발 및 리팩토링 | 개발 |
 
 ---
 
@@ -70,6 +69,10 @@ CoreData를 이용해 기록을 남기는 일기장 어플입니다.
 ---
 
 ## 👀 Class Diagram
+
+<details>
+<summary> 리팩토링 이전 - [MVC] </summary>
+	
 | **Model** | 
 | :-------------------------------------------: | 
 |![](https://i.imgur.com/7exbgco.png)|
@@ -78,47 +81,127 @@ CoreData를 이용해 기록을 남기는 일기장 어플입니다.
 | :-------------------------------------------: | 
 |![](https://i.imgur.com/FhbiC1r.png)|
 
+</details> </br>
+
+### MVVM + CleanArchitecture
+
+|<img width = 500, src = "https://i.imgur.com/1dzpFbB.png">|
+| :-------------------------------------------: | 
+
+|![](https://i.imgur.com/I84Alod.png)|
+| :-------------------------------------------: | 
 
 ---
 
 ## 🗂 폴더 구조
 ```
 Diary
-├── Model
-│   ├── DiaryInfo
-│   ├── WeatherInfo
-│   ├── Weather
+├── Diary
+│   ├── Base.lproj
+│   ├── Application
+│   │   ├── AppDelegate
+│   │   └── SceneDelegate
+│   │
+│   ├── Domain
+│   │   ├── Model
+│   │   │   ├── DiaryInfo
+│   │   │   └── WeatherInfo
+│   │   ├── UseCase
+│   │   │    ├── DeleteDiaryUseCase
+│   │   │    ├── FetchWeatherIconUseCase
+│   │   │    ├── FetchWeatherUsecase
+│   │   │    ├── SaveDiaryUseCase
+│   │   │    ├── UpdateDiaryUseCase
+│   │   │    ├── fetchDiariesUseCase
+│   │   │    └── Protocol
+│   │   │        └── Usecases
+│   │   └── Interfaces
+│   │       ├── DiariesRepository
+│   │       └── WeatherIconRepository
+│   │
+│   ├── Presentation
+│   │   └── DiariesScene
+│   │   │   └── DiaryList
+│   │   │   │   ├── View
+│   │   │   │   │   ├── DiaryCell
+│   │   │   │   │   └── DiaryListViewController
+│   │   │   │   └── ViewModel
+│   │   │   │       ├── DiaryListCellViewModel
+│   │   │   │       └── DiaryListViewModel
+│   │   │   │ 
+│   │   │   └── DiaryDetailView
+│   │   │       ├── DiaryModifyingView
+│   │   │       │   ├── View
+│   │   │       │   │   └── DiaryModifyingViewController
+│   │   │       │   └── ViewModel
+│   │   │       │       └── DiaryModifyingViewModel
+│   │   │       └── DiaryRegistrationView
+│   │   │           ├── View
+│   │   │           │   └── DiaryRegistrationViewController
+│   │   │           └── ViewModel
+│   │   │               └── DiaryRegistrationViewModel
+│   │   └── Utils
+│   │       ├── Observable
+│   │       ├── Protocols
+│   │       │   └── Alertable
+│   │       └── Extension
+│   │           ├── Date+localizedDateFormat
+│   │           ├── UIActivityViewController+ConvenienceInit
+│   │           ├── UILabel+ConvenienceInit
+│   │           └── UITextView+ConvenienceInit
+│   │
+│   ├── Data
+│   │   ├── Repositories
+│   │   │   ├── DefaultDiariesRepository
+│   │   │   └── DefaultWeatherRepository
+│   │   ├── Network
+│   │   │   ├── APIEndPoints
+│   │   │   ├── DataMapping
+│   │   │   │   └── WeatherResponseDTO+Mapping
+│   │   │   └── WeatherAPI
+│   │   ├── PersistentStorages
+│   │   │   ├── CoreDataStorage
+│   │   │   │   ├── CoreDataStorage
+│   │   │   │   └── Diary.xcdatamodeld
+│   │   │   │       ├── Diary 2.xcdatamodel
+│   │   │   │       │   └── contents
+│   │   │   │       └── Diary.xcdatamodel
+│   │   │   │           └── contents
+│   │   │   ├── DataMapping
+│   │   │   │   ├── DataMapping.swift
+│   │   │   │   └── MappintModelV1ToV2.xcmappingmodel
+│   │   │   │       └── xcmapping.xml
+│   │   │   └── DiaryCRUDableStorage
+│   │   │       ├── CoreDataDiaryCRUDStorage
+│   │   │       └── DiaryCRUDStorage
+│   │   └── TemporaryStorage
+│   │       ├── Cache
+│   │       │   └── Cache.swift
+│   │       └── WeatherIconTemporaryStorage
+│   │           ├── CacheStorage
+│   │           └── WeatherIconCache
+│   │
+│   ├── Infrastructure
+│   │   ├── DecodeManager
+│   │   │   └── DecodeManager
 │   │   ├── LocationManager
-│   │   ├── WeatherManager
-│   │   └── WeatherURL
-│   ├── CoreData
-│   │   ├── CoreDataManager
-│   │   └── MappingModelV1ToV2.xcmappingmodel
-│   ├── URLSession
-│   │   └── URLSessionProvider
-│   ├── Support
-│   │   ├── CacheManager
-│   │   └── DecodeManager
-│   ├── Extension
-│   │   └── Date+Extension
-├── View
-│   ├── DiaryListView
-│   ├── DiaryCell
-│   ├── DiaryDetailView
-│   └── CustomUI
-├──  ViewController
-│   ├── DiaryListViewController
-│   ├── DiaryDetailViewController
-│   ├── RegisterDiaryViewController 
-│   └── CustomActivityViewController 
-├── AppDelegate
-├── SceneDelegate
-└── Info.plist
-├── Diary.xcdatamodeld
-│   ├── Diary 2.xcdatamodel
-│   └── Diary.xcdatamodel
-Pods
-└── SwiftLint
+│   │   │   ├── Location
+│   │   │   └── LocationManager
+│   │   └── Network
+│   │       ├── Diary++Bundle+apiKey
+│   │       ├── EndPoint
+│   │       ├── NetworkConfig
+│   │       └── NetworkServie
+│   │
+│   └── Resource
+│       ├── Assets.xcassets
+│       ├── Info.plist
+│       └── WeatherInfo.plist
+│
+├── Podfile
+├── Podfile.lock
+└── Pods
+    └── SwiftLint
 
 ```
 
