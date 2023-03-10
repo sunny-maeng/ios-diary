@@ -40,7 +40,7 @@ final class DiaryModifyingViewController: DiaryRegistrationViewController {
     private func configureDiary() {
         titleTextView.text = viewModel.title
         titleTextView.textColor = .black
-        bodyTextView.text = viewModel.title
+        bodyTextView.text = viewModel.body
         bodyTextView.textColor = .black
     }
 
