@@ -41,7 +41,9 @@ final class DiaryListViewController: UIViewController, Alertable {
         }
 
         viewModel.error.bind { [weak self] error in
-            self?.showError(error)
+            if let error = error {
+                self?.showError(error)
+            }
         }
     }
 

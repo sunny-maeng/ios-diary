@@ -10,7 +10,7 @@ import Foundation
 final class DiaryListViewModel {
 
     var diaries: Observable<[DiaryInfo]> = Observable([])
-    var error: Observable<String> = Observable("")
+    var error: Observable<String?> = Observable(nil)
     let errorTitle = "Error"
     let navigationTitle = "일기장"
     let deleteActionTitle = "delete"
@@ -35,7 +35,7 @@ final class DiaryListViewModel {
             switch result {
             case .success(let fetchedDiaries):
                 self?.diaries.value = fetchedDiaries
-            case .failure(let error):
+            case .failure:
                 self?.error.value = "Failed loading diaries"
             }
         }
