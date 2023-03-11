@@ -22,7 +22,7 @@ final class DiaryListViewModel {
     private let deleteDiaryUseCase: DeleteDiaryUseCase
     private let fetchWeatherUseCase: FetchWeatherUseCase
 
-    init(fetchDiariesUseCase: FetchDiariesUseCase = DefaultFetchDiaryUseCase(),
+    init(fetchDiariesUseCase: FetchDiariesUseCase = DefaultFetchDiariesUseCase(),
          deleteDiaryUseCase: DeleteDiaryUseCase = DefaultDeleteDiariesUseCase(),
          fetchWeatherUseCase: FetchWeatherUseCase = DefaultFetchWeatherUseCase()) {
         self.fetchDiariesUseCase = fetchDiariesUseCase

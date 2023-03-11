@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class DefaultFetchDiariesUseCase: SaveDiaryUseCase {
+final class DefaultSaveDiaryUseCase: SaveDiaryUseCase {
 
     private let diariesRepository: DiariesRepository
 
