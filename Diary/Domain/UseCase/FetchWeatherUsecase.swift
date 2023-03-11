@@ -11,7 +11,7 @@ final class DefaultFetchWeatherUseCase: FetchWeatherUseCase {
 
     private let weatherRepository: WeatherRepository
 
-    init(weatherRepository: WeatherRepository = DefaultWeatherRepository()) {
+    init(weatherRepository: WeatherRepository) {
         self.weatherRepository = weatherRepository
     }
 

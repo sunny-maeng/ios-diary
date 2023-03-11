@@ -12,7 +12,7 @@ final class DiaryListViewController: UIViewController, Alertable {
     private var diaryCollectionView: UICollectionView?
     private var dataSource: UICollectionViewDiffableDataSource<Section, DiaryInfo>?
 
-    init(viewModel: DiaryListViewModel = DiaryListViewModel()) {
+    init(viewModel: DiaryListViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -96,9 +96,12 @@ extension DiaryListViewController {
     }
     
     private func configureDiaryListDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryInfo> { cell, _, diaryInfo in
-            let cellViewModel = DiaryListCellViewModel(diaryInfo: diaryInfo)
-            cell.configureCell(with: cellViewModel)
+        let cellRegistration = UICollectionView.CellRegistration<DiaryCell, DiaryInfo> {
+            [weak self] cell, _, diaryInfo in
+            cell.configureCell(with: DiaryListCellViewModel(diaryInfo: diaryInfo))
+            self?.viewModel.setupWeatherIcon(iconName: diaryInfo.weather?.icon ?? "") { data in
+                cell.setupWeatherIconView(icon: UIImage(data: data))
+            }
         }
 
         guard let diaryCollectionView = diaryCollectionView else { return }
@@ -122,12 +125,8 @@ extension DiaryListViewController {
 extension DiaryListViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let diaryInfo = viewModel.diaryInIndex(indexPath.item)
-        let diaryModifyingViewModel =  DiaryModifyingViewModel(diaryInfo: diaryInfo)
-        let diaryModifyingViewController = DiaryModifyingViewController(viewModel: diaryModifyingViewModel)
-
         collectionView.deselectItem(at: indexPath, animated: false)
-        self.navigationController?.pushViewController(diaryModifyingViewController, animated: true)
+        viewModel.showModifyingView(index: indexPath.item)
     }
 }
 
@@ -177,10 +176,6 @@ extension DiaryListViewController {
     }
     
     @objc private func registerDiary() {
-        viewModel.generateNewDiary { newDiary in
-            let diaryRegistrationViewModel = DiaryRegistrationViewModel(diaryInfo: newDiary)
-            let registerDiaryViewController = DiaryRegistrationViewController(viewModel: diaryRegistrationViewModel)
-            self.navigationController?.pushViewController(registerDiaryViewController, animated: true)
-        }
+        viewModel.showRegisterView()
     }
 }

@@ -8,18 +8,20 @@ import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
+    let appDIContainer = AppDIContainer()
     var window: UIWindow?
+    var appFlowCoordinator: AppFlowCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else {
-            return
-        }
+        guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
-        let diaryListViewController = DiaryListViewController()
-        let navigationController = UINavigationController(rootViewController: diaryListViewController)
-        
+        let navigationController = UINavigationController()
         window.rootViewController = navigationController
+
+        appFlowCoordinator = AppFlowCoordinator(navigationController: navigationController,
+                                                appDIContainer: appDIContainer)
+        appFlowCoordinator?.start()
         window.makeKeyAndVisible()
         self.window = window
     }

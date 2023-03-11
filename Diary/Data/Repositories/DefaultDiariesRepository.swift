@@ -11,7 +11,7 @@ final class DefaultDiariesRepository {
 
     private let diaryCRUDStorage: DiaryCRUDStorage
 
-    init(diaryCRUDStorage: DiaryCRUDStorage = CoreDataDiaryCRUDStorage() ) {
+    init(diaryCRUDStorage: DiaryCRUDStorage) {
         self.diaryCRUDStorage = diaryCRUDStorage
     }
 }

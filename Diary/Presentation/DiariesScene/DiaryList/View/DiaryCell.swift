@@ -10,7 +10,6 @@ import UIKit
 final class DiaryCell: UICollectionViewListCell {
 
     private var viewModel: DiaryListCellViewModel?
-    private var fetchWeatherIconUseCase: FetchWeatherIconUseCase? = DefaultFetchWeatherIconUseCase()
     private let titleLabel = UILabel()
     private let dateLabel = UILabel(font: .subheadline)
     private let previewLabel = UILabel(font: .caption2)
@@ -51,18 +50,11 @@ extension DiaryCell {
         titleLabel.text = viewModel.title
         dateLabel.text = viewModel.date
         previewLabel.text = viewModel.preview
-        setupWeatherIcon()
     }
 
-    private func setupWeatherIcon() {
-        guard let viewModel = viewModel,
-              let weatherIconName = viewModel.weatherIconName else { return }
-
-        fetchWeatherIconUseCase?.fetchWeatherIcon(iconName: weatherIconName) { [weak self] result in
-            if case let .success(data) = result {
-                let weatherIcon = UIImage(data: data)
-                self?.weatherIconView.image = weatherIcon
-            }
+    func setupWeatherIconView(icon: UIImage?) {
+        if let icon = icon {
+            weatherIconView.image = icon
         }
     }
 }

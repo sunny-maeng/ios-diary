@@ -32,8 +32,8 @@ struct DiaryModifyingViewModel {
     private let deleteDiaryUseCase: DeleteDiaryUseCase
 
     init(diaryInfo: DiaryInfo,
-         updateDiaryUseCase: UpdateDiaryUseCase = DefaultUpdateDiaryUseCase(),
-         deleteDiaryUseCase: DeleteDiaryUseCase = DefaultDeleteDiariesUseCase()) {
+         updateDiaryUseCase: UpdateDiaryUseCase,
+         deleteDiaryUseCase: DeleteDiaryUseCase) {
         self.diaryInfo = diaryInfo
         self.updateDiaryUseCase = updateDiaryUseCase
         self.deleteDiaryUseCase = deleteDiaryUseCase
