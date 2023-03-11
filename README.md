@@ -95,12 +95,15 @@ CoreData를 이용해 기록을 남기는 일기장 어플입니다.
 
 ## 🗂 폴더 구조
 ```
-Diary
 ├── Diary
 │   ├── Base.lproj
 │   ├── Application
 │   │   ├── AppDelegate
 │   │   └── SceneDelegate
+│   │   ├── AppFlowCoordinator
+│   │   └── DIContainer
+│   │       ├── AppDIContainer
+│   │       └── DiariesSceneDIContainer
 │   │
 │   ├── Domain
 │   │   ├── Model
