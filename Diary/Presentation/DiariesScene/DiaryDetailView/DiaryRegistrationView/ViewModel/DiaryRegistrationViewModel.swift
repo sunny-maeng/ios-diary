@@ -23,8 +23,8 @@ struct DiaryRegistrationViewModel {
     private let updateDiaryUseCase: UpdateDiaryUseCase
 
     init(diaryInfo: DiaryInfo,
-         saveDiaryUseCase: SaveDiaryUseCase = DefaultFetchDiariesUseCase(),
-         updateDiaryUseCase: UpdateDiaryUseCase = DefaultUpdateDiaryUseCase()) {
+         saveDiaryUseCase: SaveDiaryUseCase,
+         updateDiaryUseCase: UpdateDiaryUseCase) {
         self.diaryInfo = diaryInfo
         self.saveDiaryUseCase = saveDiaryUseCase
         self.updateDiaryUseCase = updateDiaryUseCase

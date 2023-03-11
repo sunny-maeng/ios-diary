@@ -12,9 +12,9 @@ final class DiaryModifyingViewController: DiaryRegistrationViewController {
 
     private var viewModel: DiaryModifyingViewModel
 
-    init(viewModel: DiaryModifyingViewModel) {
+    init(viewModel: DiaryModifyingViewModel, registeredViewModel: DiaryRegistrationViewModel) {
         self.viewModel = viewModel
-        super.init(viewModel: DiaryRegistrationViewModel(diaryInfo: viewModel.diaryInfo))
+        super.init(viewModel: registeredViewModel)
     }
 
     required init?(coder: NSCoder) {

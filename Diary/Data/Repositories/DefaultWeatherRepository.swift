@@ -12,9 +12,7 @@ final class DefaultWeatherRepository {
     private let weatherAPI: WeatherAPI
     private let weatherIconCache: CacheStorage
 
-    init(weatherAPI: WeatherAPI = DefaultWeatherAPI(locationManager: DefaultLocationManager(),
-                                                    networkService: DefaultNetworkService()),
-         weatherIconCache: CacheStorage = WeatherIconCache()) {
+    init(weatherAPI: WeatherAPI, weatherIconCache: CacheStorage) {
         self.weatherAPI = weatherAPI
         self.weatherIconCache = weatherIconCache
     }

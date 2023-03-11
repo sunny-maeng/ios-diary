@@ -7,6 +7,11 @@
 
 import Foundation
 
+struct DiaryListViewModelShowDetailViewAction {
+    let showRegisterView: (DiaryInfo) -> Void
+    let showModifyingView: (DiaryInfo) -> Void
+}
+
 final class DiaryListViewModel {
 
     var diaries: Observable<[DiaryInfo]> = Observable([])
@@ -21,13 +26,19 @@ final class DiaryListViewModel {
     private let fetchDiariesUseCase: FetchDiariesUseCase
     private let deleteDiaryUseCase: DeleteDiaryUseCase
     private let fetchWeatherUseCase: FetchWeatherUseCase
+    private let fetchWeatherIconUseCase: FetchWeatherIconUseCase
+    private let showDetailViewAction: DiaryListViewModelShowDetailViewAction
 
-    init(fetchDiariesUseCase: FetchDiariesUseCase = DefaultFetchDiaryUseCase(),
-         deleteDiaryUseCase: DeleteDiaryUseCase = DefaultDeleteDiariesUseCase(),
-         fetchWeatherUseCase: FetchWeatherUseCase = DefaultFetchWeatherUseCase()) {
+    init(fetchDiariesUseCase: FetchDiariesUseCase,
+         deleteDiaryUseCase: DeleteDiaryUseCase,
+         fetchWeatherUseCase: FetchWeatherUseCase,
+         fetchWeatherIconUseCase: FetchWeatherIconUseCase,
+         showDetailViewAction: DiaryListViewModelShowDetailViewAction) {
         self.fetchDiariesUseCase = fetchDiariesUseCase
         self.deleteDiaryUseCase = deleteDiaryUseCase
         self.fetchWeatherUseCase = fetchWeatherUseCase
+        self.fetchWeatherIconUseCase = fetchWeatherIconUseCase
+        self.showDetailViewAction = showDetailViewAction
     }
 
     func fetchDiaries() {
@@ -41,8 +52,12 @@ final class DiaryListViewModel {
         }
     }
 
-    func diaryInIndex(_ index: Int) -> DiaryInfo {
-        return diaries.value[index]
+    func setupWeatherIcon(iconName: String, completionHandler: @escaping (Data) -> Void) {
+        fetchWeatherIconUseCase.fetchWeatherIcon(iconName: iconName) { result in
+            if case let .success(data) = result {
+                completionHandler(data)
+            }
+        }
     }
 
     func deleteDiary(index: Int) {
@@ -50,25 +65,34 @@ final class DiaryListViewModel {
         diaries.value.remove(at: index)
     }
 
-    func generateNewDiary(handler: @escaping (DiaryInfo) -> Void) {
-        var diary = DiaryInfo(title: Constant.empty, body: Constant.empty, createdAt: Date(), weather: nil, id: UUID())
-
-        fetchWeatherUseCase.fetchWeather { result in
-            switch result {
-            case .success(let weatherInfo):
-                diary.weather = weatherInfo
-                handler(diary)
-            case .failure:
-                handler(diary)
-            }
-        }
-    }
-
     func generateActivityItemsOfDiary(index: Int) -> [String] {
-        let diary = diaryInIndex(index)
+        let diary = diaries.value[index]
         let title = diary.title
         let body = diary.body
         return [title, body]
+    }
+
+    func showRegisterView() {
+        generateNewDiary { [weak self] newDiary in
+            self?.showDetailViewAction.showRegisterView(newDiary)
+        }
+    }
+
+    func showModifyingView(index: Int) {
+        showDetailViewAction.showModifyingView(diaries.value[index])
+    }
+
+    private func generateNewDiary(handler: @escaping (DiaryInfo) -> Void) {
+        var diaryInfo = DiaryInfo(title: Constant.empty, body: Constant.empty, createdAt: Date(), weather: nil, id: UUID())
+        fetchWeatherUseCase.fetchWeather { result in
+            switch result {
+            case .success(let weatherInfo):
+                diaryInfo.weather = weatherInfo
+                handler(diaryInfo)
+            case .failure:
+                handler(diaryInfo)
+            }
+        }
     }
 }
 
